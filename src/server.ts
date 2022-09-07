@@ -4,6 +4,8 @@ import express from 'express';
 const app = express();
 import mongoose from 'mongoose';
 import {env} from './env';
+import {router} from './routes/inventoryRoutes';
+
 connectToDatabase().catch(err => console.log(err));
 
 async function connectToDatabase() {
@@ -15,7 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 
     app.use(express.json());
 
-const inventoryRouter = require('./routes/inventoryRoutes');
-app.use('/inventory', inventoryRouter);
+app.use('/inventory', router);
 
 app.listen(process.env.PORT, () => console.log('Server started on PORT '+process.env.PORT));
