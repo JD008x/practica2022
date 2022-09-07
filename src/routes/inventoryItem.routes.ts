@@ -50,8 +50,10 @@ inventoryItemRouter.patch("/:id", (_req: Request, _res: Response, next: NextFunc
 });
 
 //delete inventory item
-inventoryItemRouter.delete("/:id", (_req: Request, _res: Response, next: NextFunction) => {
+inventoryItemRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
   try {
+    await InventoryItemDB.findByIdAndDelete(req.params.id);
+    res.send('Deleted Item');
   } catch (ex) {
     return next(ex);
   }
