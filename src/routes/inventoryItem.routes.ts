@@ -1,11 +1,11 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { InventoryItem } from "../models/inventoryItem.model";
-import * as inventoryItemService from "../services/inventoryservice";
+import * as inventoryItemService from "../services/inventoryItem.service";
 
 //create inventory item
-const router = Router();
+const inventoryItemRouter = Router();
 
-router.post("/", async (req: Request, res: Response, next: NextFunction) => {
+inventoryItemRouter.post("/", async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   let randomVariable: Error | InventoryItem;
 
@@ -22,7 +22,7 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
 });
 
 //get inventory item
-router.get("/:id", (_req: Request, res: Response, next: NextFunction) => {
+inventoryItemRouter.get("/:id", (_req: Request, res: Response, next: NextFunction) => {
   try {
     res.send("Hello World");
   } catch (ex) {
@@ -31,14 +31,14 @@ router.get("/:id", (_req: Request, res: Response, next: NextFunction) => {
 });
 
 //get all inventory items
-router.get("/", (_req: Request, _res: Response, next: NextFunction) => {
+inventoryItemRouter.get("/", (_req: Request, _res: Response, next: NextFunction) => {
   try {
   } catch (ex) {
     return next(ex);
   }
 });
 //update inventory item
-router.patch("/:id", (_req: Request, _res: Response, next: NextFunction) => {
+inventoryItemRouter.patch("/:id", (_req: Request, _res: Response, next: NextFunction) => {
   try {
   } catch (ex) {
     return next(ex);
@@ -46,11 +46,11 @@ router.patch("/:id", (_req: Request, _res: Response, next: NextFunction) => {
 });
 
 //delete inventory item
-router.delete("/:id", (_req: Request, _res: Response, next: NextFunction) => {
+inventoryItemRouter.delete("/:id", (_req: Request, _res: Response, next: NextFunction) => {
   try {
   } catch (ex) {
     return next(ex);
   }
 });
 
-export { router };
+export { inventoryItemRouter };

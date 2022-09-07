@@ -1,5 +1,5 @@
 import { InventoryItem } from "../models/inventoryItem.model";
-import { InventoryItemDB } from "../schemas/inventoryItemSchema";
+import { InventoryItemDB } from "../schemas/inventoryItem.schema";
 
 export async function postInventory(
   inventoryItem: InventoryItem

@@ -4,7 +4,7 @@ import express from 'express';
 const app = express();
 import mongoose from 'mongoose';
 import {env} from './env';
-import {router} from './routes/inventoryRoutes';
+import {inventoryItemRouter} from './routes/inventoryItem.routes';
 
 connectToDatabase().catch(err => console.log(err));
 
@@ -17,6 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 
     app.use(express.json());
 
-app.use('/inventory', router);
+app.use('/inventory', inventoryItemRouter);
 
 app.listen(process.env.PORT, () => console.log('Server started on PORT '+process.env.PORT));
