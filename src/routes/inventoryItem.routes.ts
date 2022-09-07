@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { InventoryItem } from "../models/inventoryItem.model";
+import { InventoryItemDB } from "../schemas/inventoryItem.schema";
 import * as inventoryItemService from "../services/inventoryItem.service";
 
 //create inventory item
@@ -22,17 +23,20 @@ inventoryItemRouter.post("/", async (req: Request, res: Response, next: NextFunc
 });
 
 //get inventory item
-inventoryItemRouter.get("/:id", (_req: Request, res: Response, next: NextFunction) => {
+inventoryItemRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.send("Hello World");
+    const inventoryItemById = await InventoryItemDB.findById(req.params.id);
+    res.send(inventoryItemById);
   } catch (ex) {
     return next(ex);
   }
 });
 
 //get all inventory items
-inventoryItemRouter.get("/", (_req: Request, _res: Response, next: NextFunction) => {
+inventoryItemRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => {
   try {
+    const inventoryItems = await InventoryItemDB.find();
+    res.send(inventoryItems);
   } catch (ex) {
     return next(ex);
   }

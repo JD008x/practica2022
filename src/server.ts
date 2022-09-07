@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 import express from 'express';
 const app = express();
 import mongoose from 'mongoose';
@@ -19,4 +17,4 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/inventory', inventoryItemRouter);
 
-app.listen(process.env.PORT, () => console.log('Server started on PORT '+process.env.PORT));
+app.listen(env.PORT, () => console.log('Server started on PORT '+env.PORT));
