@@ -42,8 +42,19 @@ inventoryItemRouter.get("/", async (_req: Request, res: Response, next: NextFunc
   }
 });
 //update inventory item
-inventoryItemRouter.patch("/:id", (_req: Request, _res: Response, next: NextFunction) => {
-  try {
+inventoryItemRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
+  try { 
+    await InventoryItemDB.findOneAndUpdate(
+      {id : req.params.id},
+      {
+      //aici trebuie sa poti sa updatezi din app orice camp
+      name: 'AndreiUpdated',
+      location:'acasa',
+      modifiedDate: Date.now()
+      },
+      {new: true}
+    );
+    console.log('updated');
   } catch (ex) {
     return next(ex);
   }
