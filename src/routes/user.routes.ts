@@ -41,18 +41,16 @@ userRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => 
   }
 });
 //update 
-userRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
+userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   try { 
-    await UserDB.findOneAndUpdate(
-      {id : req.params.id},
-      {
-      name: 'AlexandraUpdated',
-      location:'facultate',
-      modifiedDate: Date.now()
-      },
-      {new: true}
+    await UserDB.findByIdAndUpdate(
+      { _id : req.params.id},
+      { lastName: 'AlexandraUpdated' },
+      //res.send(UserDB)
     );
     console.log('updated');
+    const userById = await UserDB.findById(req.params.id);
+    res.send(userById);
   } catch (ex) {
     return next(ex);
   }
@@ -63,60 +61,10 @@ userRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction
   try {
     await UserDB.findByIdAndDelete(req.params.id);
     res.send('Deleted Item');
+    console.log('deleted')
   } catch (ex) {
     return next(ex);
   }
 });
-
-
-//get user
-userRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const userById = await UserDB.findById(req.params.id);
-    res.send(userById);
-  } catch (ex) {
-    return next(ex);
-  }
-});
-
-
-//get all users
-userRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => {
-    try {
-      const userItems = await UserDB.find();
-      res.send(userItems);
-    } catch (ex) {
-      return next(ex);
-    }
-  });
-//update user
-/*
-userRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
-    try { 
-      await UserDB.findOneAndUpdate(
-        {id : req.params.id},
-        {
-        name: 'AlexandraUpdated',
-        location:'facultate',
-        modifiedDate: Date.now()
-        },
-        {new: true}
-      );
-      console.log('updated');
-    } catch (ex) {
-      return next(ex);
-    }
-  });
-  */
-
-//delete inventory item
-userRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      await UserDB.findByIdAndDelete(req.params.id);
-      res.send('Deleted Item');
-    } catch (ex) {
-      return next(ex);
-    }
-  });
 
 export { userRouter };
