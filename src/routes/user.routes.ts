@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import { User } from "../models/user.model";
-//import { UserDB } from "../schemas/user.schema";
+import { UserDB } from "../schemas/user.schema";
 import * as userService from "../services/user.service";
 
 //create user
@@ -21,40 +21,102 @@ userRouter.post("/", async (req: Request, res: Response, next: NextFunction) => 
 
   res.send(randomVariable);
 });
+//get 
+userRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const userById = await UserDB.findById(req.params.id);
+    res.send(userById);
+  } catch (ex) {
+    return next(ex);
+  }
+});
 
+//get all 
+userRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => {
+  try {
+    const userItems = await UserDB.find();
+    res.send(userItems);
+  } catch (ex) {
+    return next(ex);
+  }
+});
+//update 
+userRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
+  try { 
+    await UserDB.findOneAndUpdate(
+      {id : req.params.id},
+      {
+      name: 'AlexandraUpdated',
+      location:'facultate',
+      modifiedDate: Date.now()
+      },
+      {new: true}
+    );
+    console.log('updated');
+  } catch (ex) {
+    return next(ex);
+  }
+});
+
+//delete
+userRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    await UserDB.findByIdAndDelete(req.params.id);
+    res.send('Deleted Item');
+  } catch (ex) {
+    return next(ex);
+  }
+});
+
+
+//get user
+userRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const userById = await UserDB.findById(req.params.id);
+    res.send(userById);
+  } catch (ex) {
+    return next(ex);
+  }
+});
+
+
+//get all users
+userRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      const userItems = await UserDB.find();
+      res.send(userItems);
+    } catch (ex) {
+      return next(ex);
+    }
+  });
+//update user
 /*
-//get inventory item
-inventoryItemRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    
-  } catch (ex) {
-    return next(ex);
-  }
-});
-
-//get all inventory items
-inventoryItemRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => {
-  try {
-    
-  } catch (ex) {
-    return next(ex);
-  }
-});
-//update inventory item
-inventoryItemRouter.patch("/:id", (_req: Request, _res: Response, next: NextFunction) => {
-  try {
-  } catch (ex) {
-    return next(ex);
-  }
-});
+userRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
+    try { 
+      await UserDB.findOneAndUpdate(
+        {id : req.params.id},
+        {
+        name: 'AlexandraUpdated',
+        location:'facultate',
+        modifiedDate: Date.now()
+        },
+        {new: true}
+      );
+      console.log('updated');
+    } catch (ex) {
+      return next(ex);
+    }
+  });
+  */
 
 //delete inventory item
-inventoryItemRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    
-  } catch (ex) {
-    return next(ex);
-  }
-});
-*/
+userRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      await UserDB.findByIdAndDelete(req.params.id);
+      res.send('Deleted Item');
+    } catch (ex) {
+      return next(ex);
+    }
+  });
+
 export { userRouter };

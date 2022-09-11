@@ -12,7 +12,7 @@ const UserSchema = new Schema<User>(
     email: {type:String, required:true},
   },
   {
-    collection: env.INVENTORY_MANAGEMENT,
+    collection: env.USER_MANAGEMENT,
   }
 );
 
