@@ -11,7 +11,7 @@ userRouter.post("/", async (req: Request, res: Response, next: NextFunction) => 
   let randomVariable: Error | User;
 
   try {
-    randomVariable = await userService.postInventory(body);
+    randomVariable = await userService.postUser(body);
   } catch (ex) {
     return next(ex);
   }
@@ -40,6 +40,7 @@ userRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => 
     return next(ex);
   }
 });
+/*
 //update 
 userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   try { 
@@ -55,6 +56,30 @@ userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) =
     return next(ex);
   }
 });
+*/
+//update
+userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
+    const body = req.body;
+    user : body;
+    
+    try {
+        await UserDB.findByIdAndUpdate(
+            { _id : req.params.id},
+            {   firstName: body.firstName,
+                lastName: body.lastName,
+                phoneNumber: body.phoneNumber,
+                email: body.email },
+            //res.send(UserDB)
+          );
+          console.log('updated');
+          const userById = await UserDB.findById(req.params.id);
+          res.send(userById);
+    } catch (ex) {
+      return next(ex);
+    }
+    
+  });
+
 
 //delete
 userRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {

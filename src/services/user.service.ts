@@ -1,7 +1,7 @@
 import { User } from "../models/user.model";
 import { UserDB } from "../schemas/user.schema";
 
-export async function postInventory(
+export async function postUser(
   user: User
 ): Promise<Error | User> {
   if (!user || !user.firstName || !user.lastName || !user.phoneNumber) {
