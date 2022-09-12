@@ -10,6 +10,7 @@ const UserSchema = new Schema<User>(
     lastName: { type:String, required: true },
     phoneNumber: { type:String, required: true},
     email: {type:String, required:true},
+
   },
   {
     collection: env.USER_MANAGEMENT,
