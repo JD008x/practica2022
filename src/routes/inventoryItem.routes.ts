@@ -42,19 +42,26 @@ inventoryItemRouter.get("/", async (_req: Request, res: Response, next: NextFunc
   }
 });
 //update inventory item
-inventoryItemRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
+inventoryItemRouter.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+  inventoryItem: body;
   try { 
-    await InventoryItemDB.findOneAndUpdate(
-      {id : req.params.id},
+    await InventoryItemDB.findByIdAndUpdate(
+      {_id: req.params.id},
       {
-      //aici trebuie sa poti sa updatezi din app orice camp
-      name: 'AndreiUpdated',
-      location:'acasa',
-      modifiedDate: Date.now()
-      },
-      {new: true}
+        user: body.user,
+        name: body.name,
+        category: body.category,
+        inventoryNumber: body.inventoryNumber,
+        addedDate: body.addedDate,
+        modifiedDate: Date.now(),
+        location: body.location,
+        isDeleted: body.isDeleted
+      }
     );
     console.log('updated');
+    const inventoryItemById = await InventoryItemDB.findById(req.params.id);
+    res.send(inventoryItemById);
   } catch (ex) {
     return next(ex);
   }
