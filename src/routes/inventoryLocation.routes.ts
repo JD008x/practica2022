@@ -39,18 +39,21 @@ inventoryLocationRouter.get("/:id", async (req: Request, res: Response, next: Ne
     }
   });
 //update
-inventoryLocationRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
-    try { 
-      await InventoryLocationDB.findOneAndUpdate(
-        {id : req.params.id},
-        {
-        //aici trebuie sa poti sa updatezi din app orice camp
-        locationName: 'AndreiUpdated',
-        managerName: 'Andrei'
-        },
-        {new: true}
-      );
-      console.log('updated');
+inventoryLocationRouter.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  const body = req.body;
+  location : body;
+  
+  try {
+      await InventoryLocationDB.findByIdAndUpdate(
+          { _id : req.params.id},
+          {   locationName: body.locationName,
+              address: body.address,
+              managerName: body.managerName,
+              phoneNumber: body.phoneNumber },
+        );
+        console.log('updated');
+        const inventoryLocationById = await InventoryLocationDB.findById(req.params.id);
+        res.send(inventoryLocationById);
     } catch (ex) {
       return next(ex);
     }
