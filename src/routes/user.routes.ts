@@ -3,6 +3,8 @@ import { User } from "../models/user.model";
 import { UserDB } from "../schemas/user.schema";
 import * as userService from "../services/user.service";
 
+import { InventoryItemDB } from "../schemas/inventoryItem.schema";
+
 //create user
 const userRouter = Router();
 
@@ -84,9 +86,18 @@ userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) =
 //delete
 userRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
   try {
+    const user = await UserDB.findById(req.params.id);
+    const fullname = user?.firstName?.concat(" ").concat(user.lastName);
+
     await UserDB.findByIdAndDelete(req.params.id);
     res.send('Deleted Item');
     console.log('deleted')
+    
+    await InventoryItemDB.findOneAndUpdate(
+        { user : fullname},
+        { user : null }
+    );
+
   } catch (ex) {
     return next(ex);
   }
