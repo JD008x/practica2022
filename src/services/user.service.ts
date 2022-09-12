@@ -1,7 +1,7 @@
 import { User } from "../models/user.model";
 import { UserDB } from "../schemas/user.schema";
 
-export async function postInventory(
+export async function postUser(
   user: User
 ): Promise<Error | User> {
   if (!user || !user.firstName || !user.lastName || !user.phoneNumber) {
@@ -11,11 +11,11 @@ export async function postInventory(
   try {
     const emailExists = await UserDB.findOne({ email: user.email });
     if (emailExists) {
-      return Error("The user's email added to the database already exists!");
+      return Error("The user added to the database already exists!");
     }
     const phoneNumberExists = await UserDB.findOne({phoneNumber: user.phoneNumber})
     if(phoneNumberExists){
-      return Error("The user 's phone number added to the database already exists!");
+      return Error("The user number added to the database already exists!");
     }
   } catch (ex: any) {
     return ex;

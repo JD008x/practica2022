@@ -6,7 +6,7 @@ import { InventoryItem } from "../models/inventoryItem.model";
 
 const InventoryItemSchema = new Schema<InventoryItem>(
   {
-    user: { type: String, required: true },
+    user: { type: String, required: true, default: 'unknown' },
     name: { type:String, required: false, default:'unknown'},
     category: { type:String, requierd: false, default:'unknown'},
     inventoryNumber: { type:Number, required: true},
