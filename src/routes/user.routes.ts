@@ -42,30 +42,14 @@ userRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => 
     return next(ex);
   }
 });
-/*
-//update 
-userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
-  try { 
-    await UserDB.findByIdAndUpdate(
-      { _id : req.params.id},
-      { lastName: 'AlexandraUpdated' },
-      //res.send(UserDB)
-    );
-    console.log('updated');
-    const userById = await UserDB.findById(req.params.id);
-    res.send(userById);
-  } catch (ex) {
-    return next(ex);
-  }
-});
-*/
 //update
 userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
     user : body;
-    
-    try {
-        await UserDB.findByIdAndUpdate(
+    if(body.firstName || body.lastName || body.phoneNumber || body.email)
+    {
+      try {
+      const findUser = await UserDB.findByIdAndUpdate(
             { _id : req.params.id},
             {   firstName: body.firstName,
                 lastName: body.lastName,
@@ -73,13 +57,17 @@ userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) =
                 email: body.email },
             //res.send(UserDB)
           );
-          console.log('updated');
-          const userById = await UserDB.findById(req.params.id);
-          res.send(userById);
+        if(findUser == null)
+            return next('Could not find user!');
+        console.log('updated');
+        const userById = await UserDB.findById(req.params.id);
+        res.send(userById);
     } catch (ex) {
       return next(ex);
     }
-    
+  }else{
+    return next('No attributes found!');
+  }
   });
 
 

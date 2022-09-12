@@ -45,27 +45,34 @@ inventoryItemRouter.get("/", async (_req: Request, res: Response, next: NextFunc
 inventoryItemRouter.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   inventoryItem: body;
-  try { 
-    await InventoryItemDB.findByIdAndUpdate(
-      {_id: req.params.id},
-      {
-        user: body.user,
-        name: body.name,
-        category: body.category,
-        inventoryNumber: body.inventoryNumber,
-        addedDate: body.addedDate,
-        modifiedDate: Date.now(),
-        location: body.location,
-        isDeleted: body.isDeleted
-      }
-    );
-    console.log('updated');
-    const inventoryItemById = await InventoryItemDB.findById(req.params.id);
-    res.send(inventoryItemById);
+  if(body.user || body.name || body.category || body.inventoryNumber || body.addedDate || body.modifiedDate || body.location || body.isDeleted)
+   { try { 
+      const findInventoryItem = await InventoryItemDB.findByIdAndUpdate(
+        {_id: req.params.id},
+        {
+          user: body.user,
+          name: body.name,
+          category: body.category,
+          inventoryNumber: body.inventoryNumber,
+          addedDate: body.addedDate,
+          modifiedDate: Date.now(),
+          location: body.location,
+          isDeleted: body.isDeleted
+        }
+      );
+      if(findInventoryItem == null)
+          return next('Could not find inventory item!');
+      console.log('updated');
+      const inventoryItemById = await InventoryItemDB.findById(req.params.id);
+      res.send(inventoryItemById);
   } catch (ex) {
     return next(ex);
   }
-});
+}else{
+  return next('No attributes found!');
+}
+}
+);
 
 //delete inventory item
 inventoryItemRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {

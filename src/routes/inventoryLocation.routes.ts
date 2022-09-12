@@ -42,21 +42,27 @@ inventoryLocationRouter.get("/:id", async (req: Request, res: Response, next: Ne
 inventoryLocationRouter.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   location : body;
-  
-  try {
-      await InventoryLocationDB.findByIdAndUpdate(
+  if(body.locationName || body.address || body.managerName || body.phoneNumber)
+  {
+    try {
+      const findLocation = await InventoryLocationDB.findByIdAndUpdate(
           { _id : req.params.id},
           {   locationName: body.locationName,
               address: body.address,
               managerName: body.managerName,
               phoneNumber: body.phoneNumber },
         );
-        console.log('updated');
-        const inventoryLocationById = await InventoryLocationDB.findById(req.params.id);
-        res.send(inventoryLocationById);
+      if(findLocation == null)
+          return next("Could not find this location");
+      console.log('updated');
+      const inventoryLocationById = await InventoryLocationDB.findById(req.params.id);
+      res.send(inventoryLocationById);
     } catch (ex) {
       return next(ex);
     }
+  }else{
+    return next('No attributes found!');
+  }
   });
 //delete 
 inventoryLocationRouter.delete("/:id", async (req: Request, res: Response, next: NextFunction) => {
