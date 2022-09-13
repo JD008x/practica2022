@@ -11,7 +11,7 @@ inventoryCategoryRouter.post("/", async (req: Request, res: Response, next: Next
   let randomVariable: Error | Category;
 
   try {
-    randomVariable = await categoryService.postInventory(body);
+    randomVariable = await categoryService.postCategory(body);
   } catch (ex) {
     return next(ex);
   }
@@ -25,8 +25,8 @@ inventoryCategoryRouter.post("/", async (req: Request, res: Response, next: Next
 //get inventory item
 inventoryCategoryRouter.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const inventoryItemById = await CategoryDB.findById(req.params.id);
-    res.send(inventoryItemById);
+    const categoryById = await CategoryDB.findById(req.params.id);
+    res.send(categoryById);
   } catch (ex) {
     return next(ex);
   }
@@ -42,22 +42,29 @@ inventoryCategoryRouter.get("/", async (_req: Request, res: Response, next: Next
   }
 });
 //update inventory item
-inventoryCategoryRouter.patch("/:id", async (req: Request, _res: Response, next: NextFunction) => {
-  try { 
-    await CategoryDB.findOneAndUpdate(
-      {id : req.params.id},
-      {
-      //aici trebuie sa poti sa updatezi din app orice camp
-      name: 'AndreiUpdated',
-      location:'acasa',
-      modifiedDate: Date.now()
-      },
-      {new: true}
-    );
-    console.log('updated');
+inventoryCategoryRouter.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
+    const body = req.body;
+    inventoryCategory: body;
+    if(body.name || body.parentCategory)
+    { try { 
+        const findCategory = await CategoryDB.findByIdAndUpdate(
+          {_id: req.params.id},
+          {
+            name: body.name,
+            parentCategory:body.parentCategory
+          }
+        );
+        if(findCategory == null)
+            return next('Could not find category!');
+        console.log('updated');
+        const categoryById = await CategoryDB.findById(req.params.id);
+        res.send(categoryById);
   } catch (ex) {
     return next(ex);
   }
+}else{
+    return next('No attributes found!');
+}
 });
 
 //delete inventory item

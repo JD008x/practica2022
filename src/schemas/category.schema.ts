@@ -6,8 +6,8 @@ import { Category } from "../models/category.model";
 
 const CategorySchema = new Schema<Category>(
   {
-    name: { type:String, required: false, default:'unknown'},
-    parent_category: { type:String, required: false, default:'unknown'}
+    name: { type:String, required: true, default:''},
+    parentCategory: { type:String, required: false, default:''}
 
   },
   {
