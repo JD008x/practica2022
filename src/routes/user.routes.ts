@@ -66,7 +66,7 @@ userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) =
       return next(ex);
     }
   }else{
-    return next('No attributes found!');
+    res.send('No attributes found!');
   }
   });
 
