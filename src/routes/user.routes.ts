@@ -46,22 +46,35 @@ userRouter.get("/", async (_req: Request, res: Response, next: NextFunction) => 
 userRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
     user : body;
+
+    const user = await UserDB.findById(req.params.id);
+    const fullname1 = user?.firstName?.concat(" ").concat(user.lastName);
+    
+
     if(body.firstName || body.lastName || body.phoneNumber || body.email)
     {
       try {
-      const findUser = await UserDB.findByIdAndUpdate(
-            { _id : req.params.id},
-            {   firstName: body.firstName,
-                lastName: body.lastName,
-                phoneNumber: body.phoneNumber,
-                email: body.email },
-            //res.send(UserDB)
-          );
+        
+        const findUser = await UserDB.findByIdAndUpdate(
+          { _id : req.params.id},
+          {   firstName: body.firstName,
+              lastName: body.lastName,
+              phoneNumber: body.phoneNumber,
+              email: body.email },
+        );
         if(findUser == null)
-            return next('Could not find user!');
+          res.send('Could not find user!');
+
         console.log('updated');
         const userById = await UserDB.findById(req.params.id);
-        res.send(userById);
+        res.send(userById,);
+
+        const fullname2 = userById?.firstName.concat(" ",userById.lastName);
+        await InventoryItemDB.findOneAndUpdate(
+          { user : fullname1},
+          { user : fullname2 }
+        );
+
     } catch (ex) {
       return next(ex);
     }
