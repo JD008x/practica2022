@@ -6,5 +6,6 @@ export const env = {
   INVENTORY_MANAGEMENT: "inventory",
   USER_MANAGEMENT: "user",
   LOCATION_MANAGEMENT: "location",
+  CATEGORY_MANAGEMENT: "category",
   PORT: 3000
 };
