@@ -1,11 +1,13 @@
-<div>
-    <nav>
-        <a routerLink="/inventory">Inventory</a>
-        <a routerLink="/scan">Scan</a>
-        <a routerLink="/add-item">Add Item</a>
-        <a routerLink="/administration">Administration</a>
-        <a routerLink="/edit">Edit</a>
-        <a routerLink="/contact">Contact</a>
-    </nav>
+<div class="centered">
+    <div class="camera">
+        <zxing-scanner
+        [torch]="torchEnabled"
+        [(device)]="currentDevice"
+        [scanSuccess]="onCodeResult($event)"
+        [formats]="scannerFormats"
+        [tryHarder]="tryHarder"
+        (permissionResponse)="onHasPermission($event)"
+        (camerasFound)="onCamerasFound($event)"
+        ></zxing-scanner>
+    </div>
 </div>
-<h1>scan works works</h1>

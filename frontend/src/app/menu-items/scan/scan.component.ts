@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ZXingScannerModule} from '@zxing/ngx-scanner'
 
 @Component({
   selector: 'scan',
