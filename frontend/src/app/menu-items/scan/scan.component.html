@@ -8,4 +8,16 @@
         <a routerLink="/contact">Contact</a>
     </nav>
 </div>
-<h1>scan works works</h1>
+<div class="centered">
+    <div class="camera">
+        <zxing-scanner
+        [torch]="torchEnabled"
+        [(device)]="currentDevice"
+        (scanSuccess)="onCodeResult($event)"
+        [formats]="scannerFormats"
+        [tryHarder]="tryHarder"
+        (permissionResponse)="onHasPermission($event)"
+        (camerasFound)="onCamerasFound($event)"
+        ></zxing-scanner>
+    </div>
+</div>
