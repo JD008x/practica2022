@@ -13,4 +13,8 @@ export class InventoryItem {
   location?:string;
   isDeleted!:boolean;
 
+  public constructor(init?:Partial<InventoryItem>){
+    Object.assign(this, init);
+}
+
 }
