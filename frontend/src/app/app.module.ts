@@ -8,12 +8,15 @@ import { InventoryComponent } from './menu-items/inventory/inventory.component';
 import { ScanComponent } from './menu-items/scan/scan.component';
 import { AddItemComponent } from './menu-items/add-item/add-item.component';
 import { EditComponent } from './menu-items/edit/edit.component';
-import { AdministrationComponent } from './menu-items/administration/administration.component';
+
+import { UsersPageComponent } from './menu-items/administration/users-page/users-page.component';
+import { LocationPageComponent } from './menu-items/administration/location-page/location-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { ShowItemComponent } from './show-item/show-item.component'
 import { QRCodeModule } from 'angularx-qrcode'
-import { ZXingScannerModule } from '@zxing/ngx-scanner'
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner'
     ScanComponent,
     AddItemComponent,
     EditComponent,
-    AdministrationComponent,
+    UsersPageComponent,
+    LocationPageComponent,
     
   ],
   imports: [

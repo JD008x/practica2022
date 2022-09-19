@@ -1,0 +1,28 @@
+div.maps{
+    align-content: center;
+    display: flex;
+    padding-left: 20px;
+   
+}
+div.info{
+  
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    padding:20px 25px;
+}
+
+b{
+    width: 600px;
+    height:450px;
+    font-size: large;
+    padding-bottom: 15px;
+}
+
+iframe{
+    display: flex;
+    width:600px;
+     height:450px;
+      border:0;
+     
+}
