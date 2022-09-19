@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ContactData } from 'src/app/app-logic/contact-data';
+import { ContactProviderService } from 'src/app/app-logic/contact-provider.service';
+
 
 @Component({
   selector: 'contact',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+  contactData: ContactData ;
+  
+  constructor(private contactProviderService:ContactProviderService) {
+    this.contactData = contactProviderService.getData();
+   }
 
   ngOnInit(): void {
   }

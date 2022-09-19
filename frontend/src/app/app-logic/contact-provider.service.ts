@@ -14,4 +14,8 @@ export class ContactProviderService {
   }
 
   constructor() { }
+
+  getData(): ContactData {
+    return this.providedData;
+  }
 }
