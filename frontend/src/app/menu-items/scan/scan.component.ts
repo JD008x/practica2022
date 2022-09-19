@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ZXingScannerModule} from '@zxing/ngx-scanner'
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import {BarcodeFormat} from '@zxing/library'
 import { Router } from '@angular/router';
 
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'scan',

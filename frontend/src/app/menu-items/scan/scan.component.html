@@ -1,3 +1,5 @@
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 <div>
     <nav>
         <a routerLink="/inventory">Inventory</a>
@@ -8,12 +10,24 @@
         <a routerLink="/contact">Contact</a>
     </nav>
 </div>
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 <div class="centered">
     <div class="camera">
         <zxing-scanner
         [torch]="torchEnabled"
         [(device)]="currentDevice"
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         (scanSuccess)="onCodeResult($event)"
+=======
+        [scanSuccess]="onCodeResult($event)"
+>>>>>>> Stashed changes
+=======
+        [scanSuccess]="onCodeResult($event)"
+>>>>>>> Stashed changes
         [formats]="scannerFormats"
         [tryHarder]="tryHarder"
         (permissionResponse)="onHasPermission($event)"
