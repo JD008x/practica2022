@@ -7,10 +7,10 @@ import {ContactData} from './contact-data';
 export class ContactProviderService {
   providedData = <ContactData>{
     info: 'Inventory application',
-    address: 'Str. Turnului nr. 5',
-    openDays: 'Luni-Vineri',
-    timeSlot: '9:00 - 17:00',
-    phone: '+40747432345'
+    address: 'Str. Turnului, Nr. 5',
+    openDays: 'Luni - Vineri',
+    timeSlot: '09:00 - 17:00',
+    phone: '+40 747 432 345'
   }
 
   constructor() { }
