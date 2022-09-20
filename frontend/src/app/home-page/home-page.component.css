@@ -1,24 +1,38 @@
-/* .container{
+
+  .container{
+    background-image: url('./../../assets/images/bg.jpg');
+    background-size:cover; /* contain - Resize the background image to make sure the image is fully visible */
+                              /* cover - il pune pe toata pagina web*/                                  
     height: 100%;
     width:100%;
     display: flex;
     justify-content: center;
     align-items: center;
-} */
+    opacity: 1;  
+}
 
-/* .body{
-  background-image:url('./../../assets/images/bg.jpg');
-} */
- 
- .image {
-     background-image: url('./../../assets/images/bg.jpg');
-     background-size:cover; /* contain - Resize the background image to make sure the image is fully visible */
-                             /* cover - il pune pe toata pagina web*/    
+.description {
+    height: 60%;
+    width:30%;
+    display: flex;
+    position:absolute; 
+    right: 70px; 
+    text-align:right;
+    font-size: 170%;
+    font-family: 'Times New Roman', Times, serif;
+}
+h1 {
+   /*background-color: aquamarine;
+    */
+    height: 100%;
+    width:100%;
+    display: flex;
+    justify-content: right;
+    position:absolute; 
+    top: 120px; 
+    right: 140px;
+    text-align:center;
+    font-size: 300%;
+    font-family: 'Times New Roman', Times, serif;
+}
     
- }
-
- .image-text {
-     text-align: center,justify;
-     color: white;
- }
- 
