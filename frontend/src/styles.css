@@ -1,11 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:500'); */
+
+
+/* html, body { height: 100%; }
 
 a:link, a:visited {
     background-color: chocolate;
-    color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -14,4 +15,53 @@ a:link, a:visited {
 
 a:hover, a:active{
     background-color: cadetblue;
+} */
+
+/* * {  */
+    /* styles that override everything */
+    /* box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color:beige;
 }
+
+a,button{
+    font-family: "Montserrat",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color:white;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+.nav_links {
+   display: inline-block;
+   padding: 0px 20px;
+}
+
+.nav_links a {
+    transition: all 0.3s ease 0s;
+} */
+
+/* .nav_links a:hover {
+   color:aqua
+} */
+
+/* button{
+    padding: 9px 25px;
+    background-color: rgba(0, 136, 169, 1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover{
+    background-color: rgba(0, 136, 169, 0.8);
+} */

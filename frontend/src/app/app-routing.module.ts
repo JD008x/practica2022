@@ -8,25 +8,25 @@ import { ContactComponent } from './menu-items/contact/contact.component';
 import { AdministrationComponent } from './menu-items/administration/administration.component';
 
 const routes: Routes = [
-  {path:'', component: HomePageComponent},
-  {path:'inventory', component:InventoryComponent},
-  {path:'scan', component:ScanComponent},
-  {path:'add-item', component:AddItemComponent},
-  {path:'edit/:id', component:AddItemComponent},
-  {path:'contact', component:ContactComponent},
-  {path:'administration', component:AdministrationComponent}
+  { path: '', component: HomePageComponent },
+  { path: 'home', component: HomePageComponent },
+  { path: 'inventory', component: InventoryComponent },
+  { path: 'scan', component: ScanComponent },
+  { path: 'add-item', component: AddItemComponent },
+  { path: 'edit/:id', component: AddItemComponent },
+  { path: 'contact', component: ContactComponent },
+  { path: 'administration', component: AdministrationComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
 export const RoutingComponent = [
   HomePageComponent,
   InventoryComponent,
   ScanComponent,
   AddItemComponent,
   ContactComponent,
-  
 ];

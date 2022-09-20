@@ -6,8 +6,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-page.component.css'],
 })
 export class HomePageComponent implements OnInit {
-  backgroundImage: string = 'assets/images/bg.jpg';
-
   constructor(private router: Router) {}
 
   ngOnInit(): void {}
