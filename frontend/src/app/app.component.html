@@ -1,3 +1,41 @@
+<<<<<<< HEAD
+<router-outlet>
+
+    <div>
+        <nav>
+            <button mat-button>
+                <a routerLink="/">HOME</a>
+            </button>
+            <button mat-button>
+                <a routerLink="/inventory">INVENTORY</a>
+            </button>
+            <button mat-button>
+                <a routerLink="/scan">SCAN</a>
+            </button>
+            <button mat-button>
+                <a routerLink="/add-item">ADD ITEM</a>
+            </button>
+
+            <button mat-button [matMenuTriggerFor]="menu">
+                <a  routerLink="router.url">ADMINISTRATION</a>
+                <mat-icon style="color: white;">arrow_forward_ios</mat-icon>
+            </button>
+            <mat-menu 
+            #menu="matMenu" 
+            xPosition="before"
+            yPosition="below">
+                <button mat-menu-item routerLink="/users"><mat-icon>person</mat-icon>Users</button>
+                <button mat-menu-item routerLink="/location"><mat-icon>map</mat-icon>Location</button>
+            </mat-menu>
+            
+            <button mat-button>
+                <a routerLink="/contact">CONTACT</a>
+            </button>
+        </nav>
+        </div>
+
+</router-outlet>
+=======
 <body>
     <header>
       <nav class="nav_links">
@@ -12,3 +50,4 @@
     </header>
 </body>
 <router-outlet></router-outlet>
+>>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e

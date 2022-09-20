@@ -1,3 +1,23 @@
+<<<<<<< HEAD
+nav{
+    background-color: chocolate;
+}
+.menu{
+    background-color: chocolate;
+}
+a:link, a:visited {
+    background-color: chocolate;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding:10px 25px;
+}
+
+a:hover, a:active{
+    background-color: cadetblue;
+}
+=======
  html, body{
     height: 100%;
     
@@ -27,3 +47,4 @@ header {
 .nav_links a {
     transition: all 0.3s ease 0s;
 } 
+>>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -9,10 +8,17 @@ import { InventoryComponent } from './menu-items/inventory/inventory.component';
 import { ScanComponent } from './menu-items/scan/scan.component';
 import { AddItemComponent } from './menu-items/add-item/add-item.component';
 import { EditComponent } from './menu-items/edit/edit.component';
-import { AdministrationComponent } from './menu-items/administration/administration.component';
+
+import { UsersPageComponent } from './menu-items/administration/users-page/users-page.component';
+import { LocationPageComponent } from './menu-items/administration/location-page/location-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { ShowItemComponent } from './show-item/show-item.component'
+<<<<<<< HEAD
+import { QRCodeModule } from 'angularx-qrcode'
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
+=======
 import {QRCodeModule} from 'angularx-qrcode'
 import {ZXingScannerModule} from '@zxing/ngx-scanner'
 import { MatTableModule } from '@angular/material/table';
@@ -20,6 +26,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+>>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e
 
 @NgModule({
   declarations: [
@@ -30,7 +37,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ScanComponent,
     AddItemComponent,
     EditComponent,
-    AdministrationComponent,
+    UsersPageComponent,
+    LocationPageComponent,
     
   ],
   imports: [
