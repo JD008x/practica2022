@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ZXingScannerModule} from '@zxing/ngx-scanner'
 import {BarcodeFormat} from '@zxing/library'
 import { Router } from '@angular/router';
-
-
 @Component({
   selector: 'scan',
   templateUrl: './scan.component.html',
