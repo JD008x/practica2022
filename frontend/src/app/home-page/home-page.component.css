@@ -1,38 +1,74 @@
 
-  .container{
-    background-image: url('./../../assets/images/bg.jpg');
-    background-size:cover; /* contain - Resize the background image to make sure the image is fully visible */
-                              /* cover - il pune pe toata pagina web*/                                  
-    height: 100%;
-    width:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 1;  
+.container{
+  background-image: url('./../../assets/images/img.jpeg');
+  background-size:cover; /* contain - Resize the background image to make sure the image is fully visible */
+                            /* cover - il pune pe toata pagina web*/                                  
+  height: 90%;
+  width:100%;
+  display: flex;
+  justify-content: left;
+  opacity: 0.7;
 }
 
 .description {
-    height: 60%;
-    width:30%;
-    display: flex;
-    position:absolute; 
-    right: 70px; 
-    text-align:right;
-    font-size: 170%;
-    font-family: 'Times New Roman', Times, serif;
+  width:40%;
+  display: inline-block;
+
+  text-align: left;
+  margin-left: 5%;
+  font-family: 'Segoe Ui';
+  font-size: 20px;
+  margin-top: 15%;
+  color:rgb(61, 64, 148);
 }
 h1 {
-   /*background-color: aquamarine;
-    */
-    height: 100%;
-    width:100%;
-    display: flex;
-    justify-content: right;
-    position:absolute; 
-    top: 120px; 
-    right: 140px;
-    text-align:center;
-    font-size: 300%;
-    font-family: 'Times New Roman', Times, serif;
+display: flex;
+position: absolute; 
+text-align: left;
+margin-left: 5%;
+font-family: 'Calibri';
+font-size: 50px;
+margin-top: 10%;
+color:rgb(61, 64, 148);
 }
-    
+
+
+section {
+margin-top: 40%;
+margin-right: -120%;
+padding: 80px;
+display: grid;
+grid-auto-flow: column;
+gap: 4px;
+align-items: center;
+justify-items: center;
+}
+
+.item {
+padding: 20px ;
+border: 1px solid #3d4094;
+margin: 30px;
+color: rgb(61, 64, 148);
+text-decoration: none!important;
+}
+
+.item:hover{
+padding: 20px ;
+margin: 30px;
+background-color: #3d4094;
+color: white;
+}
+
+h4{
+text-align: center;
+}
+
+a { text-decoration: none; }
+
+.cards {
+font-size: 16px;
+text-align: center;
+
+
+}
+

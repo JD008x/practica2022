@@ -1,39 +1,27 @@
-body{
-    background-color: chocolate;
-}
+
 table{
     width: 100%;
     background-color: azure;
 }
 th {
     color:black;
-    border-color: chocolate;
-    
   }
   
-  tr {
-    color: coral;
-    
-  }
+
 button {
     background-color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     padding:10px 25px;
-    border-color: chocolate;
     font-size: 150%;
-    color: chocolate;
-
-
     display: flex;
     position:absolute; 
     width: 16.5%;
     left: 41.75%; 
     bottom: auto;
-
 }
 
 button:hover, button:active{
-    background-color: cadetblue;
+    background-color: rgb(185, 238, 240);
 }

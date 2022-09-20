@@ -1,18 +1,21 @@
+
 nav{
-    background-color: chocolate;
+    background-color: rgb(106, 109, 185);
 }
 .menu{
-    background-color: chocolate;
+    background-color: rgb(106, 109, 185);
 }
 a:link, a:visited {
-    background-color: chocolate;
+    background-color: rgb(106, 109, 185);
     color: white;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     padding:10px 25px;
+    font-weight: 100;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a:hover, a:active{
-    background-color: cadetblue;
+    background-color:rgb(85, 88, 172);
 }
