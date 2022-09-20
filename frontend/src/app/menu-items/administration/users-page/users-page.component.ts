@@ -1,60 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-import { SelectionModel } from '@angular/cdk/collections';
-import { ConnectionService } from 'src/app/app-logic/connection.service';
-import { User } from '../../../../../../backend/src/models/user.model'
-import { Observable, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-users-page',
   templateUrl: './users-page.component.html',
   styleUrls: ['./users-page.component.css']
 })
-export class InventoryComponent implements OnInit {
+export class UsersPageComponent implements OnInit {
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
-  @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
-
-  users: any;
-
-  inventoryColumns: string[] = [
-    'select',
-    'firstname',
-    'lastName',
-    'phoneNumber',
-    'email',
-    'modifiedDate',
-    'actions'
-  ];
-
-  selection = new SelectionModel<Element>(true, []);
-
-  constructor(private userList: ConnectionService) {
-    this.users = userList.getUsersFromBackend();
-   }
+  constructor() { }
 
   ngOnInit(): void {
-    this.userList.getUsersFromBackend().subscribe(result => {
-
-      if(!result){
-        return ;
-      }
-      this.users= new MatTableDataSource(result);
-      this.users.sort= this.sort;
-      this.users.paginator=this.paginator;
-     })
   }
 
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.users.data.length;
-    return numSelected === numRows;
-  }
-
-  masterToggle() {
-    this.isAllSelected() ? this.selection.clear() :
-      this.users.data.forEach((row: Element) => this.selection.select(row));
-  }
 }
