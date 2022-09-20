@@ -1,4 +1,29 @@
-html, body{
+ html, body{
     height: 100%;
+    
 }
 
+a {  
+    font-family: "Montserrat",sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color:white;
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 10%;
+    margin: 0px 0px 0px 400px;
+}
+
+.nav_links {
+   display: inline-block;
+   padding: 0px 20px;
+}
+
+.nav_links a {
+    transition: all 0.3s ease 0s;
+} 
