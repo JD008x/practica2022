@@ -3,20 +3,7 @@
     
 }
 
-a:link, a:visited {
-    background-color: chocolate;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    padding:10px 25px;
-}
-
-a:hover, a:active{
-    background-color: cadetblue;
-}
-
-
-a{ 
+a {  
     font-family: "Montserrat",sans-serif;
     font-weight: 500;
     font-size: 16px;
@@ -32,13 +19,6 @@ header {
     margin: 0px 0px 0px 400px;
 }
 
-/* .topnav-centered{
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: none;
-} */
-
 .nav_links {
    display: inline-block;
    padding: 0px 20px;
@@ -47,20 +27,3 @@ header {
 .nav_links a {
     transition: all 0.3s ease 0s;
 } 
-
-/* .nav_links a:hover {
-   color:aqua
-} */
-
- /* button{
-    padding: 9px 25px;
-    background-color: rgba(0, 136, 169, 1);
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
-}
-
-button:hover{
-    background-color: rgba(0, 136, 169, 0.5);
-} */
