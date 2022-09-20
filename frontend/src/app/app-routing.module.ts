@@ -6,6 +6,7 @@ import { ScanComponent } from './menu-items/scan/scan.component';
 import { AddItemComponent } from './menu-items/add-item/add-item.component';
 import { ContactComponent } from './menu-items/contact/contact.component';
 import { AdministrationComponent } from './menu-items/administration/administration.component';
+import { ShowItemComponent } from './show-item/show-item.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },

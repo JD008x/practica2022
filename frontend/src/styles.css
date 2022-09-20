@@ -1,9 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:500'); */
-
-
-/* html, body { height: 100%; }
+/* html, body { height: 100%; } */
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 a:link, a:visited {
     background-color: chocolate;
@@ -15,7 +14,7 @@ a:link, a:visited {
 
 a:hover, a:active{
     background-color: cadetblue;
-} */
+} 
 
 /* * {  */
     /* styles that override everything */
