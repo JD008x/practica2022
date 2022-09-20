@@ -12,7 +12,6 @@ import { MatMenuModule } from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon'
 
 const routes: Routes = [
-<<<<<<< HEAD
   {path:'', component: HomePageComponent},
   {path:'inventory', component:InventoryComponent},
   {path:'scan', component:ScanComponent},
@@ -31,23 +30,11 @@ const routes: Routes = [
   exports: [RouterModule,
             MatMenuModule,
             MatIconModule]
-=======
-  { path: '', component: HomePageComponent },
-  { path: 'home', component: HomePageComponent },
-  { path: 'inventory', component: InventoryComponent },
-  { path: 'scan', component: ScanComponent },
-  { path: 'add-item', component: AddItemComponent },
-  { path: 'edit/:id', component: AddItemComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: 'administration', component: AdministrationComponent },
-];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
->>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e
 })
+
 export class AppRoutingModule {}
+
 export const RoutingComponent = [
   HomePageComponent,
   InventoryComponent,

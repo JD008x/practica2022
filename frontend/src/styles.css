@@ -2,19 +2,5 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:500'); */
 /* html, body { height: 100%; } */
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-<<<<<<< HEAD
-=======
-
-a:link, a:visited {
-    background-color: chocolate;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    padding:10px 25px;
-}
-
-a:hover, a:active{
-    background-color: cadetblue;
-} 
->>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e
