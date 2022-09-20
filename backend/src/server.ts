@@ -6,7 +6,8 @@ import {inventoryItemRouter} from './routes/inventoryItem.routes';
 import {userRouter} from './routes/user.routes';
 import {inventoryLocationRouter} from './routes/inventoryLocation.routes';
 import { inventoryCategoryRouter } from './routes/category.routes';
-
+import cors from 'cors'
+app.use(cors());
 connectToDatabase().catch(err => console.log(err));
 
 async function connectToDatabase() {
