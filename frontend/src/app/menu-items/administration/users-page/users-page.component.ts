@@ -4,8 +4,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
-import { User } from '../../../../../../backend/src/models/user.model'
+
 import { Observable, tap } from 'rxjs';
+import { ObjectId } from 'mongoose';
+
 
 @Component({
   selector: 'app-users-page',
@@ -55,5 +57,11 @@ export class UsersPageComponent implements OnInit {
   masterToggle() {
     this.isAllSelected() ? this.selection.clear() :
       this.users.data.forEach((row: Element) => this.selection.select(row));
+  }
+
+  delete(event: any) {
+    this.userList.deleteUsers(this.users.value._id).subscribe(data => {
+      alert('Success');
+  });
   }
 }

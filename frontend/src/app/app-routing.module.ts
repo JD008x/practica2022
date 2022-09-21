@@ -6,6 +6,8 @@ import { ScanComponent } from './menu-items/scan/scan.component';
 import { AddItemComponent } from './menu-items/add-item/add-item.component';
 import { ContactComponent } from './menu-items/contact/contact.component';
 import { UsersPageComponent } from './menu-items/administration/users-page/users-page.component';
+import { AddUserComponent } from './menu-items/administration/users-page/add-user/add-user.component';
+import { ShowUserComponent } from './menu-items/administration/users-page/show-user/show-user.component';
 import { LocationPageComponent } from './menu-items/administration/location-page/location-page.component';
 import { ShowItemComponent } from './show-item/show-item.component';
 import { MatMenuModule } from '@angular/material/menu';
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path:'item/:id', component:ShowItemComponent},
   {path:'contact', component:ContactComponent},
   {path:'users', component:UsersPageComponent},
+  {path:'addUser', component:AddUserComponent},
+  {path:'editUser', component:ShowUserComponent},
   {path:'location', component:LocationPageComponent},
 ];
 

@@ -1,4 +1,7 @@
+import { ObjectId } from "mongoose";
+
 export class User{
+    id!:ObjectId
     firstName!:string;
     lastName!:string;
     phoneNumber!:string;
