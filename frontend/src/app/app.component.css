@@ -1,4 +1,3 @@
-<<<<<<< HEAD
  html, body{
     height: 100%;
     
@@ -28,7 +27,6 @@ header {
 .nav_links a {
     transition: all 0.3s ease 0s;
 } 
-=======
 
 nav{
     background-color: rgb(106, 109, 185);
@@ -50,4 +48,3 @@ a:link, a:visited {
 a:hover, a:active{
     background-color:rgb(85, 88, 172);
 }
->>>>>>> 4e4d05dc4656e1f81d3e4bf43ca73f8ed7a8d00f

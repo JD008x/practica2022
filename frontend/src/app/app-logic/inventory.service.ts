@@ -31,19 +31,19 @@ export class InventoryService {
 
   addItem(item:InventoryItem){
     console.log(item);
-    console.log(InventoryItemDB.db.name);
-    const NewInventoryItem = new InventoryItemDB({
-      user : item.user,
-      name: item.name ,
-      category: item.category ,
-      inventoryNumber : item.inventoryNumber,
-      addedDate: item.addedDate,
-      modifiedDate: item.modifiedDate ,
-      location: item.location,
-      isDeleted: item.isDeleted
-    });
+    // console.log(InventoryItemDB.db.name);
+    // const NewInventoryItem = new InventoryItemDB({
+    //   user : item.user,
+    //   name: item.name ,
+    //   category: item.category ,
+    //   inventoryNumber : item.inventoryNumber,
+    //   addedDate: item.addedDate,
+    //   modifiedDate: item.modifiedDate ,
+    //   location: item.location,
+    //   isDeleted: item.isDeleted
+    // });
 
-    NewInventoryItem.save();
+    // NewInventoryItem.save();
   }
 
 

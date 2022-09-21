@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { InventoryItem } from '../../../../../backend/src/models/inventoryItem.model'
 import { Observable, tap } from 'rxjs';
+import { InventoryService } from 'src/app/app-logic/inventory.service';
 
 @Component({
   selector: 'inventory',
