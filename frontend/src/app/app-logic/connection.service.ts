@@ -16,18 +16,21 @@ export class ConnectionService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'my-auth-token',
+      Authorization: 'my-auth-token'
     }),
   };
   inventoryUrl = 'http://localhost:3000/inventory';
   userUrl = 'http://localhost:3000/user';
+  locationUrl = 'http://localhost:3000/location';
 
   inventoryData: Array<InventoryItem>;
   userData: Array<User>;
+  locationData: Array<InventoryLocation>;
 
   constructor(private http: HttpClient) {
     this.inventoryData = new Array<InventoryItem>();
     this.userData = new Array<User>();
+    this.locationData = new Array<InventoryLocation>();
   }
  
   getDataFromBackend(): Observable<InventoryItem[]>{
@@ -86,10 +89,45 @@ export class ConnectionService {
     return this.http.post<User>(this.userUrl, user, this.httpOptions);
   }
 
+  updateUser(id: ObjectId) {
+    const url = this.userUrl+'/'+id;
+    return this.http.put(url, this.httpOptions);
+  }
+
+  deleteUser(id:ObjectId) {
+    const url = this.userUrl+'/'+id;
+    return this.http.delete(url);
+  }
+
 
   getInventoryLocation():Observable<InventoryLocation[]>{
-    return this.http.get<InventoryLocation[]>('http://localhost:3000/location');
+    return this.http.get<InventoryLocation[]>(this.locationUrl);
   }
+
+  getLocationById(id : ObjectId): InventoryLocation {
+    this.getInventoryLocation().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      this.locationData = result;
+    });
+    return this.locationData.filter((x) => x._id == id)[0];
+  }
+  
+  addLocation(location : InventoryLocation): Observable<InventoryLocation>{
+    return this.http.post<InventoryLocation>(this.locationUrl, location, this.httpOptions);
+  }
+
+  updateLocation(id: ObjectId) {
+    const url = this.locationUrl+'/'+id;
+    return this.http.put(url, this.httpOptions);
+  }
+
+  deleteLocation(id:ObjectId) {
+    const url = this.locationUrl+'/'+id;
+    return this.http.delete(url);
+  }
+
   /*
   getItemById(id:ObjectId):InventoryItem{
     this.getDataFromBackend().subscribe(result => {

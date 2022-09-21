@@ -7,11 +7,11 @@ import { AddItemComponent } from './menu-items/add-item/add-item.component';
 import { ContactComponent } from './menu-items/contact/contact.component';
 import { UsersPageComponent } from './menu-items/administration/users-page/users-page.component';
 import { AddUserComponent } from './menu-items/administration/users-page/add-user/add-user.component';
-import { ShowUserComponent } from './menu-items/administration/users-page/show-user/show-user.component';
 import { LocationPageComponent } from './menu-items/administration/location-page/location-page.component';
 import { ShowItemComponent } from './show-item/show-item.component';
 import { MatMenuModule } from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon'
+import { AddLocationComponent } from './menu-items/administration/location-page/add-location/add-location.component';
 
 const routes: Routes = [
   {path:'', component: HomePageComponent},
@@ -23,8 +23,10 @@ const routes: Routes = [
   {path:'contact', component:ContactComponent},
   {path:'users', component:UsersPageComponent},
   {path:'addUser', component:AddUserComponent},
-  {path:'editUser', component:ShowUserComponent},
+  {path:'editUser/:id', component:AddUserComponent},
   {path:'location', component:LocationPageComponent},
+  {path:'addLocation', component:AddLocationComponent},
+  {path:'editLocation/:id', component:AddLocationComponent},
 ];
 
 @NgModule({

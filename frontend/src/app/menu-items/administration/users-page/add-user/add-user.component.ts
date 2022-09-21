@@ -6,6 +6,7 @@ import { User } from '../../../../../../../backend/src/models/user.model';
 import { ObjectId } from 'mongoose';
 import { ObjectUnsubscribedError } from 'rxjs';
 
+
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
@@ -43,6 +44,7 @@ export class AddUserComponent implements OnInit {
   onSubmit() {
     if (String(this.userId) == '0') {
       this.user = new User(this.addUserForm.value);
+      this.userService.updateUser(this.userId);
     } else {
       this.user.firstName = this.addUserForm.value.firstName;
       this.user.lastName = this.addUserForm.value.lastName;

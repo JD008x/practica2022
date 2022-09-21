@@ -7,6 +7,8 @@ import { ConnectionService } from 'src/app/app-logic/connection.service';
 
 import { Observable, tap } from 'rxjs';
 import { ObjectId } from 'mongoose';
+import { User } from '../../../../../../backend/src/models/user.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -20,6 +22,8 @@ export class UsersPageComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
   users: any;
+  user!: User;
+  userId!: ObjectId;
 
   userColumns: string[] = [
     'select',
@@ -32,16 +36,23 @@ export class UsersPageComponent implements OnInit {
   ];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private userList: ConnectionService) {
-    this.users = userList.getUsersFromBackend();
+  constructor(
+    private userService: ConnectionService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute) 
+    {
+    this.users = userService.getUsersFromBackend();
+    activatedRoute.params.subscribe((params) => {
+      this.userId = params['_id'] ?? '0';
+    });
    }
 
   ngOnInit(): void {
-    this.userList.getUsersFromBackend().subscribe(result => {
-
+    this.userService.getUsersFromBackend().subscribe(result => {
       if(!result){
         return ;
       }
+
       this.users= new MatTableDataSource(result);
       this.users.sort= this.sort;
       this.users.paginator=this.paginator;
@@ -61,8 +72,17 @@ export class UsersPageComponent implements OnInit {
 
   /*
   delete(event: any) {
-    this.userList.deleteUsers(this.users.value._id).subscribe(data => {
+    this.userService.deleteUsers(this.users.value._id).subscribe(data => {
       alert('Success');
   });
   }*/
+
+  onDelete(id:ObjectId) {
+    this.userService.deleteUser(id).subscribe();
+    this.router.navigate(['/users']);
+  }
+
+  onEdit(id:ObjectId) {
+    this.router.navigate(['editUser/'+id]);
+  }
 }
