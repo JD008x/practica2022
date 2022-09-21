@@ -22,6 +22,11 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddUserComponent } from './menu-items/administration/users-page/add-user/add-user.component';
 import { ShowUserComponent } from './menu-items/administration/users-page/show-user/show-user.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {MatInputModule } from '@angular/material/input'
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,12 @@ import { ShowUserComponent } from './menu-items/administration/users-page/show-u
     HttpClientModule,
     MatSortModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

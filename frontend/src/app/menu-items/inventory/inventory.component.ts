@@ -6,6 +6,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { InventoryItem } from '../../../../../backend/src/models/inventoryItem.model'
 import { Observable, tap } from 'rxjs';
+import { InventoryService } from 'src/app/app-logic/inventory.service';
 
 @Component({
   selector: 'inventory',
@@ -34,13 +35,12 @@ export class InventoryComponent implements OnInit {
   ];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private inventoryList: ConnectionService) {
+  constructor(private inventoryList: InventoryService) {
     this.inventoryItems = inventoryList.getDataFromBackend();
    }
 
   ngOnInit(): void {
     this.inventoryList.getDataFromBackend().subscribe(result => {
-
       if(!result){
         return ;
       }
