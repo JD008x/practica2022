@@ -1,0 +1,87 @@
+<h1>Add new user</h1>
+
+<div class="row">
+  <div class="column">
+    <form [formGroup]="addUserForm" *ngIf='addUserForm' (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Firstname: </mat-label>
+          <input
+            matInput
+            placeholder="Firstname"
+            type="text"
+            formControlName="firstName"
+          />
+          <mat-error *ngIf="hasError('firstName', 'required')"
+            >The firstname is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+
+      <!-- <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Description: </mat-label>
+          <textarea
+            id="description"
+            matInput
+            placeholder="Description"
+            formControlName="description"
+          ></textarea>
+          <mat-error *ngIf="hasError('description', 'required')"
+            >The description is required</mat-error
+          >
+        </mat-form-field>
+      </p> -->
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Lastname: </mat-label>
+          <input
+            matInput
+            placeholder="Lastname"
+            type="text"
+            formControlName="lastName"
+          />
+          <mat-error *ngIf="hasError('lastName', 'required')"
+            >The lastname is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Phone number: </mat-label>
+          <input
+            matInput
+            placeholder="PhoneNumber"
+            type="text"
+            formControlName="phoneNumber"
+          />
+          <mat-error *ngIf="hasError('phoneNumber', 'required')"
+            >The phone number field is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Email: </mat-label>
+          <input
+            matInput
+            placeholder="Email"
+            type="text"
+            formControlName="email"
+          />
+          <mat-error *ngIf="hasError('email', 'required')"
+            >The email is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      
+      <button mat-raised-button type="submit" [disabled]="!addUserForm.valid">
+        Submit
+      </button>
+    </form>
+  </div>
+ 
+</div>
+
+<p>Form value: {{ addUserForm.value | json }}</p>
+<p>Form status: {{ addUserForm.status }}</p>
