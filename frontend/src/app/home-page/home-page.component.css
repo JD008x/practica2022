@@ -10,7 +10,12 @@
   opacity: 0.7;
 }
 
-.description {
+.description{
+  display: inline;
+  padding: 5%;
+}
+
+.paragraph {
   width:40%;
   display: inline-block;
   text-align: left;
@@ -20,6 +25,7 @@
   margin-top: 20%;
   color:rgb(61, 64, 148);
 }
+
 h1 {
 display: flex;
 position: absolute; 
@@ -30,8 +36,6 @@ font-size: 90px;
 margin-top: 13%;
 color:rgb(61, 64, 148);
 }
-
-/* iejnfiwf */
 
 section {
 margin-top: 55%;
@@ -44,14 +48,16 @@ align-items: center;
 justify-items: center;
 }
 
-.item {
+.cards {
+height: 150px;
+width: 300px;
 padding: 20px ;
 border: 1px solid #3d4094;
 margin: 30px;
 color: rgb(61, 64, 148);
 }
 
-.item:hover{
+.cards:hover{
 padding: 20px ;
 margin: 30px;
 background-color: #3d4094;
@@ -65,10 +71,9 @@ font-size: 20px;
 
 a { text-decoration: none; }
 
-.cards {
+.cards-text {
+
 font-size: 16px;
 text-align: center;
-
-
 }
 
