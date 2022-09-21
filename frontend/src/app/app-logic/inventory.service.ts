@@ -1,51 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InventoryItem } from '../../../../backend/src/models/inventoryItem.model';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { ObjectId } from 'mongoose';
 import { InventoryItemDB } from '../../../../backend/src/schemas/inventoryItem.schema';
-import {postInventory} from '../../../../backend/src/services/inventoryItem.service'
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InventoryService {
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'my-auth-token',
+    }),
+  };
+  inventoryUrl = 'http://localhost:3000/inventory';
+  inventoryData: Array<InventoryItem>;
 
-  inventoryData !: Array<InventoryItem>;
-
-  constructor(private http: HttpClient) {}
-
-  getDataFromBackend(): Observable<InventoryItem[]>{
-    return this.http.get<InventoryItem[]>('http://localhost:3000/inventory');
+  constructor(private http: HttpClient) {
+    this.inventoryData = new Array<InventoryItem>();
   }
 
-  getItemById(id:ObjectId):InventoryItem{
-    this.getDataFromBackend().subscribe(result => {
-      if(!result){
-        return ;
+  getDataFromBackend(): Observable<InventoryItem[]> {
+    return this.http.get<InventoryItem[]>(this.inventoryUrl);
+  }
+
+  getItemById(id: ObjectId): InventoryItem {
+    this.getDataFromBackend().subscribe((result) => {
+      if (!result) {
+        return;
       }
       this.inventoryData = result;
-     })
+    });
     return this.inventoryData.filter((x) => x._id == id)[0];
-
   }
 
-  addItem(item:InventoryItem){
-    console.log(item);
-    // console.log(InventoryItemDB.db.name);
-    // const NewInventoryItem = new InventoryItemDB({
-    //   user : item.user,
-    //   name: item.name ,
-    //   category: item.category ,
-    //   inventoryNumber : item.inventoryNumber,
-    //   addedDate: item.addedDate,
-    //   modifiedDate: item.modifiedDate ,
-    //   location: item.location,
-    //   isDeleted: item.isDeleted
-    // });
-
-    // NewInventoryItem.save();
+  addItem(item: InventoryItem): Observable<InventoryItem> {
+    return this.http.post<InventoryItem>(
+      this.inventoryUrl,
+      item,
+      this.httpOptions
+    );
   }
-
-
-
 }

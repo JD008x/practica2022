@@ -11,23 +11,29 @@ export async function postInventory(
   try {
     const exists = await InventoryItemDB.findOne({ user: inventoryItem.user });
     if (exists) {
-      return Error("The item added to the database already exists based on the User!");
+      return Error(
+        "The item added to the database already exists based on the User!"
+      );
     }
-    const inventoryNumberExists = await InventoryItemDB.findOne({inventoryNumber: inventoryItem.inventoryNumber})
-    if(inventoryNumberExists){
-      return Error("The item added to the database already exists based on the Inventory Number!");
+    const inventoryNumberExists = await InventoryItemDB.findOne({
+      inventoryNumber: inventoryItem.inventoryNumber,
+    });
+    if (inventoryNumberExists) {
+      return Error(
+        "The item added to the database already exists based on the Inventory Number!"
+      );
     }
   } catch (ex: any) {
     return ex;
   }
 
   const NewInventoryItem = new InventoryItemDB({
-    user : inventoryItem.user,
-    name: inventoryItem.name ,
-    category: inventoryItem.category ,
-    inventoryNumber : inventoryItem.inventoryNumber,
+    user: inventoryItem.user,
+    name: inventoryItem.name,
+    category: inventoryItem.category,
+    inventoryNumber: inventoryItem.inventoryNumber,
     addedDate: inventoryItem.addedDate,
-    modifiedDate: inventoryItem.modifiedDate ,
+    modifiedDate: inventoryItem.modifiedDate,
     location: inventoryItem.location,
     isDeleted: inventoryItem.isDeleted,
   });
