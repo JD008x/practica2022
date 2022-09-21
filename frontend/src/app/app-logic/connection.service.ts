@@ -4,6 +4,7 @@ import { InventoryItem } from '../../../../backend/src/models/inventoryItem.mode
 import { Observable, tap } from 'rxjs';
 
 import { User } from '../../../../backend/src/models/user.model';
+import { InventoryLocation } from '../../../../backend/src/models/inventoryLocation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,10 @@ export class ConnectionService {
 
   getUsersFromBackend(): Observable<User[]>{
     return this.http.get<User[]>('http://localhost:3000/user');
+  }
+
+  getInventoryLocation():Observable<InventoryLocation[]>{
+    return this.http.get<InventoryLocation[]>('http://localhost:3000/location');
   }
   
 }
