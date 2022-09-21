@@ -20,6 +20,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {MatInputModule } from '@angular/material/input'
 
 @NgModule({
   declarations: [
@@ -45,7 +49,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     HttpClientModule,
     MatSortModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
