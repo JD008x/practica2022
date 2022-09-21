@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
-import { UserService } from 'src/app/app-logic/user.service';
+import { ConnectionService } from 'src/app/app-logic/connection.service';
 
 import { Observable, tap } from 'rxjs';
 import { ObjectId } from 'mongoose';
@@ -32,7 +32,7 @@ export class UsersPageComponent implements OnInit {
   ];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private userList: UserService) {
+  constructor(private userList: ConnectionService) {
     this.users = userList.getUsersFromBackend();
    }
 
@@ -59,9 +59,10 @@ export class UsersPageComponent implements OnInit {
       this.users.data.forEach((row: Element) => this.selection.select(row));
   }
 
+  /*
   delete(event: any) {
     this.userList.deleteUsers(this.users.value._id).subscribe(data => {
       alert('Success');
   });
-  }
+  }*/
 }

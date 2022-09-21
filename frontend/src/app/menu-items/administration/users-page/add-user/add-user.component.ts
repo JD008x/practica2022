@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/app-logic/user.service';
+import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { User } from '../../../../../../../backend/src/models/user.model';
 import { ObjectId } from 'mongoose';
 import { ObjectUnsubscribedError } from 'rxjs';
@@ -17,7 +17,7 @@ export class AddUserComponent implements OnInit {
   userId!: ObjectId;
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private userService: ConnectionService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {

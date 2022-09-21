@@ -23,16 +23,15 @@ export class ConnectionService {
   userUrl = 'http://localhost:3000/user';
 
   inventoryData: Array<InventoryItem>;
+  userData: Array<User>;
+
   constructor(private http: HttpClient) {
     this.inventoryData = new Array<InventoryItem>();
+    this.userData = new Array<User>();
   }
-
+ 
   getDataFromBackend(): Observable<InventoryItem[]>{
     return this.http.get<InventoryItem[]>(this.inventoryUrl);
-  }
-
-  getUsersFromBackend(): Observable<User[]>{
-    return this.http.get<User[]>(this.userUrl);
   }
 
   getItemById(id: ObjectId): InventoryItem {
@@ -68,18 +67,24 @@ export class ConnectionService {
     );
   }
   
-/*
-  getUserById(id : ObjectId): Observable<User[]>{
-    return this.http.get<User[]>('http://localhost:3000/user/:id');
+
+  getUsersFromBackend(): Observable<User[]>{
+    return this.http.get<User[]>(this.userUrl);
   }
 
-  postUser(user : User): Observable<User[]>{
-    return this.http.post<User[]>('http://localhost:3000/user', user);
-  }*/
-  deleteUsers(id : ObjectId): Observable<User[]>{
-    return this.http.delete<User[]>('http://localhost:3000/user/:id');
+  getUserById(id : ObjectId): User {
+    this.getUsersFromBackend().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      this.userData = result;
+    });
+    return this.userData.filter((x) => x._id == id)[0];
   }
-
+  
+  addUser(user : User): Observable<User>{
+    return this.http.post<User>(this.userUrl, user, this.httpOptions);
+  }
 
 
   getInventoryLocation():Observable<InventoryLocation[]>{
