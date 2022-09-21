@@ -1,17 +1,21 @@
 import { ObjectId } from "mongoose";
 
 export class User{
-    id!:ObjectId
-    firstName!:string;
-    lastName!:string;
-    phoneNumber!:string;
-    email!:string;
+    _id!:ObjectId;
+    firstName='';
+    lastName='';
+    phoneNumber='';
+    email='';
 
-  constructor(user: User){
+    public constructor(init?:Partial<User>){
+      Object.assign(this, init);
+      
+ /* constructor(user: User){
     this.firstName = user.firstName;
     this.lastName = user.lastName;
     this.phoneNumber = user.phoneNumber;
     this.email = user.email;
   }
-
+*/
   }
+}

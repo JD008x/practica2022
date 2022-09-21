@@ -45,4 +45,6 @@ export const RoutingComponent = [
   ScanComponent,
   AddItemComponent,
   ContactComponent,
+  UsersPageComponent,
+  AddUserComponent,
 ];
