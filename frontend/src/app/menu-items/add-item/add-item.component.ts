@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InventoryService } from 'src/app/app-logic/inventory.service';
+import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { InventoryItem } from '../../../../../backend/src/models/inventoryItem.model';
 import { ObjectId } from 'mongoose';
-import { ObjectUnsubscribedError } from 'rxjs';
 
 @Component({
   selector: 'add-item',
@@ -17,7 +16,7 @@ export class AddItemComponent implements OnInit {
   itemId!: ObjectId;
   constructor(
     private fb: FormBuilder,
-    private inventoryService: InventoryService,
+    private connectionService: ConnectionService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -30,10 +29,9 @@ export class AddItemComponent implements OnInit {
     this.item =
       String(this.itemId) == '0'
         ? new InventoryItem()
-        : this.inventoryService.getItemById(this.itemId);
+        : this.connectionService.getItemById(this.itemId);
     this.addItemForm = this.fb.group({
       name: [this.item.name, Validators.required],
-      // description:[this.item.description, Validators.maxLength(100)],
       user: [this.item.user, Validators.required],
       category: [this.item.category, Validators.required],
       location: [this.item.location, Validators.required],
@@ -46,6 +44,7 @@ export class AddItemComponent implements OnInit {
   }
 
   onSubmit() {
+    let exists = false;
     if (String(this.itemId) == '0') {
       this.item = new InventoryItem(this.addItemForm.value);
       this.item.modifiedDate = new Date();
@@ -54,17 +53,17 @@ export class AddItemComponent implements OnInit {
       this.item.name = this.addItemForm.value.name;
       this.item.location = this.addItemForm.value.location;
       this.item.user = this.addItemForm.value.user;
+
       this.item.inventoryNumber = this.addItemForm.value.inventoryNumber;
       this.item.addedDate = new Date(this.addItemForm.value.addedDate);
       this.item.modifiedDate = new Date();
       this.item.isDeleted = this.addItemForm.value.isDeleted;
       this.item.category = this.addItemForm.value.category;
     }
-    console.log('item' + this.item);
-    console.log('inventorydata' + this.inventoryService.inventoryData);
-    this.inventoryService
+
+    this.connectionService
       .addItem(this.item)
-      .subscribe((x) => this.inventoryService.inventoryData.push(x));
+      .subscribe((x) => this.connectionService.inventoryData.push(x));
     this.router.navigate(['/inventory']);
   }
 
