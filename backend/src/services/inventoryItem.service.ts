@@ -1,7 +1,6 @@
 import { InventoryItem } from "../models/inventoryItem.model";
 import { InventoryItemDB } from "../schemas/inventoryItem.schema";
-// import { User } from "../models/user.model";
-// import { InventoryLocation } from "../models/inventoryLocation.model";
+
 export async function postInventory(
   inventoryItem: InventoryItem
 ): Promise<Error | InventoryItem> {
@@ -23,14 +22,13 @@ export async function postInventory(
   }
 
   const NewInventoryItem = new InventoryItemDB({
-    // user: new User(inventoryItem.user),
     user : inventoryItem.user,
     name: inventoryItem.name ,
     category: inventoryItem.category ,
     inventoryNumber : inventoryItem.inventoryNumber,
     addedDate: inventoryItem.addedDate,
     modifiedDate: inventoryItem.modifiedDate ,
-    // location: new InventoryLocation(inventoryItem.location),
+    location: inventoryItem.location,
     isDeleted: inventoryItem.isDeleted,
   });
   NewInventoryItem.save();

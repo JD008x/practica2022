@@ -1,7 +1,118 @@
-<<<<<<< HEAD
+<h1>Add Inventory Item</h1>
+<div class="row">
+  <div class="column">
+    <form [formGroup]="addItemForm" *ngIf='addItemForm' (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Item name: </mat-label>
+          <input
+            matInput
+            matInput
+            placeholder="Item name"
+            type="text"
+            formControlName="name"
+          />
+          <mat-error *ngIf="hasError('name', 'required')"
+            >The name is required</mat-error
+          >
+        </mat-form-field>
+      </p>
 
-=======
-<div>
+      <!-- <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Description: </mat-label>
+          <textarea
+            id="description"
+            matInput
+            placeholder="Description"
+            formControlName="description"
+          ></textarea>
+          <mat-error *ngIf="hasError('description', 'required')"
+            >The description is required</mat-error
+          >
+        </mat-form-field>
+      </p> -->
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>User: </mat-label>
+          <input
+            matInput
+            placeholder="User name"
+            type="text"
+            formControlName="user"
+          />
+          <mat-error *ngIf="hasError('user', 'required')"
+            >The user is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Category: </mat-label>
+          <input
+            matInput
+            placeholder="Category"
+            type="text"
+            formControlName="category"
+          />
+          <mat-error *ngIf="hasError('category', 'required')"
+            >The Category field is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Location: </mat-label>
+          <input
+            matInput
+            placeholder="Location"
+            type="text"
+            formControlName="location"
+          />
+          <mat-error *ngIf="hasError('location', 'required')"
+            >The location is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Inventory number: </mat-label>
+          <input
+            matInput
+            placeholder="Inventory number"
+            type="text"
+            formControlName="inventoryNumber"
+          />
+          <mat-error *ngIf="hasError('inventoryNumber', 'required')"
+            >The inventory number is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Created at: </mat-label>
+          <input
+            matInput
+            placeholder="Added date"
+            type="date"
+            formControlName="addedDate"
+          />
+          <mat-error *ngIf="hasError('addedDate', 'required')"
+            >The Created At field is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <button mat-raised-button type="submit" [disabled]="!addItemForm.valid">
+        Submit
+      </button>
+    </form>
+  </div>
+  <div class="column">
+    <div *ngIf="itemId" class="centered">
+      <qrcode [qrdata]="itemId.toString()"></qrcode>
+    </div>
+  </div>
 </div>
->>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e
-<h1>add item works</h1>
+
+<p>Form value: {{ addItemForm.value | json }}</p>
+<p>Form status: {{ addItemForm.status }}</p>

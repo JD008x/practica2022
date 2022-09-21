@@ -1,17 +1,20 @@
 // import { InventoryLocation } from "./inventoryLocation.model";
 // import { User } from "./user.model";
 
+import { ObjectId } from "mongoose";
+
 export class InventoryItem {
   // user!:User;
-  user!: string;
-  name?:string;
-  category?:string;
-  inventoryNumber!: number;
-  addedDate?:Date;
-  modifiedDate?:Date;
+  _id!:ObjectId;
+  user = '';
+  name= '';
+  category= '';
+  inventoryNumber=0;
+  addedDate= new Date();
+  modifiedDate= new Date();
   // location?:InventoryLocation;
-  location?:string;
-  isDeleted!:boolean;
+  location='';
+  isDeleted=false;
 
   public constructor(init?:Partial<InventoryItem>){
     Object.assign(this, init);

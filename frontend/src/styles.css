@@ -3,8 +3,6 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:500'); */
 /* html, body { height: 100%; } */
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-<<<<<<< HEAD
-=======
 
 a:link, a:visited {
     background-color: chocolate;
@@ -17,4 +15,3 @@ a:link, a:visited {
 a:hover, a:active{
     background-color: cadetblue;
 } 
->>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e

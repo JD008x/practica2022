@@ -14,11 +14,6 @@ import { LocationPageComponent } from './menu-items/administration/location-page
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { ShowItemComponent } from './show-item/show-item.component'
-<<<<<<< HEAD
-import { QRCodeModule } from 'angularx-qrcode'
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
-
-=======
 import {QRCodeModule} from 'angularx-qrcode'
 import {ZXingScannerModule} from '@zxing/ngx-scanner'
 import { MatTableModule } from '@angular/material/table';
@@ -26,7 +21,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
->>>>>>> 8ad67f5cfed52b1f1fd6e501a890591f8532831e
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms'
+import {MatInputModule } from '@angular/material/input'
 
 @NgModule({
   declarations: [
@@ -52,7 +50,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     HttpClientModule,
     MatSortModule,
     MatCheckboxModule,
-    MatTableModule
+    MatTableModule,
+    MatMenuModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
