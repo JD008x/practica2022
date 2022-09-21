@@ -8,7 +8,6 @@ import { InventoryComponent } from './menu-items/inventory/inventory.component';
 import { ScanComponent } from './menu-items/scan/scan.component';
 import { AddItemComponent } from './menu-items/add-item/add-item.component';
 import { EditComponent } from './menu-items/edit/edit.component';
-
 import { UsersPageComponent } from './menu-items/administration/users-page/users-page.component';
 import { LocationPageComponent } from './menu-items/administration/location-page/location-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
