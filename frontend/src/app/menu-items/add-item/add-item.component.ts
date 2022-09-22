@@ -75,7 +75,7 @@ export class AddItemComponent implements OnInit {
           return;
         }
         this.item = result;
-        console.log(this.item.category);
+
         this.addItemForm = this.fb.group({
           name: [this.item.name, Validators.required],
           user: [this.item.user, Validators.required],
@@ -96,17 +96,18 @@ export class AddItemComponent implements OnInit {
       this.item = new InventoryItem(this.addItemForm.value);
       this.item.modifiedDate = new Date();
       this.item.isDeleted = false;
+      this.connectionService
+        .addItem(this.item)
+        .subscribe((x) => this.connectionService.inventoryData.push(x));
     } else {
       this.item.name = this.addItemForm.value.name;
       this.item.inventoryNumber = this.addItemForm.value.inventoryNumber;
       this.item.addedDate = new Date(this.addItemForm.value.addedDate);
       this.item.modifiedDate = new Date();
       this.item.isDeleted = this.addItemForm.value.isDeleted;
+      this.connectionService.updateItem(this.item);
     }
 
-    this.connectionService
-      .addItem(this.item)
-      .subscribe((x) => this.connectionService.inventoryData.push(x));
     this.router.navigate(['/inventory']);
   }
 
