@@ -4,51 +4,46 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
-import { InventoryLocation } from '../../../../../../backend/src/models/inventoryLocation.model';
+import { Category } from '../../../../../../backend/src/models/category.model';
 import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-location-page',
-  templateUrl: './location-page.component.html',
-  styleUrls: ['./location-page.component.css'],
+  templateUrl: './category-page.component.html',
+  styleUrls: ['./category-page.component.css'],
 })
-export class LocationPageComponent implements OnInit {
+export class CategoryPageComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator:
     | MatPaginator
     | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
-  location: any;
+  category: any;
 
-  locationColumns: string[] = [
-    'select',
-    'id',
-    'locationName',
-    'address',
-    'managerName',
-    'phoneNumber',
-    'actions',
-  ];
+  categoryColumns: string[] = ['select', 'name', 'parentCategory'];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private inventoryLocation: ConnectionService) {
-    this.location = inventoryLocation.getInventoryLocationData();
+  constructor(private connectionService: ConnectionService) {
+    this.connectionService.getCategoryData().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      this.category = result;
+    });
   }
   ngOnInit(): void {
-    this.inventoryLocation
-      .getInventoryLocationData()
-      .subscribe((result: unknown[] | undefined) => {
-        if (!result) {
-          return;
-        }
-        this.location = new MatTableDataSource(result);
-        this.location.sort = this.sort;
-        this.location.paginator = this.paginator;
-      });
+    this.connectionService.getCategoryData().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      this.category = new MatTableDataSource(result);
+      this.category.sort = this.sort;
+      this.category.paginator = this.paginator;
+    });
   }
   isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
-    const numRows = this.inventoryLocation.getInventoryLocationData.length;
+    const numRows = this.connectionService.getCategoryData.length;
     return numSelected == numRows;
   }
 

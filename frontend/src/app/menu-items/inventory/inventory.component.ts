@@ -4,6 +4,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
+import { ObjectId } from 'mongoose';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'inventory',
@@ -33,12 +35,15 @@ export class InventoryComponent implements OnInit {
   ];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private inventoryList: ConnectionService) {
-    this.inventoryItems = inventoryList.getDataFromBackend();
+  constructor(
+    private inventoryList: ConnectionService,
+    private router: Router
+  ) {
+    this.inventoryItems = inventoryList.getInventoryData();
   }
 
   ngOnInit(): void {
-    this.inventoryList.getDataFromBackend().subscribe((result) => {
+    this.inventoryList.getInventoryData().subscribe((result) => {
       if (!result) {
         return;
       }
@@ -60,5 +65,9 @@ export class InventoryComponent implements OnInit {
       : this.inventoryItems.data.forEach((row: Element) =>
           this.selection.select(row)
         );
+  }
+
+  onClickEdit(id: ObjectId) {
+    this.router.navigate(['edit/' + String(id)]);
   }
 }
