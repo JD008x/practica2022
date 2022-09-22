@@ -1,0 +1,87 @@
+<h1>LOCATION DATA</h1>
+
+<div class="row">
+  <div class="column">
+    <form [formGroup]="addLocationForm" *ngIf='addLocationForm' (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Location name: </mat-label>
+          <input
+            matInput
+            placeholder="LocationName"
+            type="text"
+            formControlName="locationName"
+          />
+          <mat-error *ngIf="hasError('locationName', 'required')"
+            >The location name is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+
+      <!-- <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Description: </mat-label>
+          <textarea
+            id="description"
+            matInput
+            placeholder="Description"
+            formControlName="description"
+          ></textarea>
+          <mat-error *ngIf="hasError('description', 'required')"
+            >The description is required</mat-error
+          >
+        </mat-form-field>
+      </p> -->
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Address: </mat-label>
+          <input
+            matInput
+            placeholder="Address"
+            type="text"
+            formControlName="address"
+          />
+          <mat-error *ngIf="hasError('address', 'required')"
+            >The address is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Manager name: </mat-label>
+          <input
+            matInput
+            placeholder="ManagerName"
+            type="text"
+            formControlName="managerName"
+          />
+          <mat-error *ngIf="hasError('managerName', 'required')"
+            >The manager name field is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field appearance="outline">
+          <mat-label>Phone number: </mat-label>
+          <input
+            matInput
+            placeholder="PhoneNumber"
+            type="text"
+            formControlName="phoneNumber"
+          />
+          <mat-error *ngIf="hasError('phoneNumber', 'required')"
+            >The phone number is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+      
+      <button mat-raised-button type="submit" [disabled]="!addLocationForm.valid">
+        Submit
+      </button>
+    </form>
+  </div>
+ 
+</div>
+
+<p>Form value: {{ addLocationForm.value | json }}</p>
+<p>Form status: {{ addLocationForm.status }}</p>

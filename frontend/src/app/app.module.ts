@@ -21,11 +21,11 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AddUserComponent } from './menu-items/administration/users-page/add-user/add-user.component';
-import { ShowUserComponent } from './menu-items/administration/users-page/show-user/show-user.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-import {MatInputModule } from '@angular/material/input'
+import {MatInputModule } from '@angular/material/input';
+import { AddLocationComponent } from './menu-items/administration/location-page/add-location/add-location.component';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import {MatInputModule } from '@angular/material/input'
     UsersPageComponent,
     LocationPageComponent,
     AddUserComponent,
-    ShowUserComponent,
+    AddLocationComponent,
     
   ],
   imports: [

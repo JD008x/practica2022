@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InventoryItem } from '../../../../backend/src/models/inventoryItem.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ObjectId } from 'mongoose';
 import { InventoryItemDB } from '../../../../backend/src/schemas/inventoryItem.schema';
 import {postInventory} from '../../../../backend/src/services/inventoryItem.service'
@@ -16,23 +16,25 @@ export class ConnectionService {
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      Authorization: 'my-auth-token',
+      Authorization: 'my-auth-token'
     }),
   };
   inventoryUrl = 'http://localhost:3000/inventory';
   userUrl = 'http://localhost:3000/user';
+  locationUrl = 'http://localhost:3000/location';
 
   inventoryData: Array<InventoryItem>;
+  userData: Array<User>;
+  locationData: Array<InventoryLocation>;
+
   constructor(private http: HttpClient) {
     this.inventoryData = new Array<InventoryItem>();
+    this.userData = new Array<User>();
+    this.locationData = new Array<InventoryLocation>();
   }
 
   getDataFromBackend(): Observable<InventoryItem[]>{
     return this.http.get<InventoryItem[]>(this.inventoryUrl);
-  }
-
-  getUsersFromBackend(): Observable<User[]>{
-    return this.http.get<User[]>(this.userUrl);
   }
 
   getItemById(id: ObjectId): InventoryItem {
@@ -67,24 +69,68 @@ export class ConnectionService {
       this.httpOptions
     );
   }
-  
-/*
-  getUserById(id : ObjectId): Observable<User[]>{
-    return this.http.get<User[]>('http://localhost:3000/user/:id');
+
+
+  getUsersFromBackend(): Observable<User[]>{
+    return this.http
+    .get<User[]>(this.userUrl)
+    .pipe(
+      tap((result: User[]) => this.userData = result)
+    );
   }
 
-  postUser(user : User): Observable<User[]>{
-    return this.http.post<User[]>('http://localhost:3000/user', user);
-  }*/
-  deleteUsers(id : ObjectId): Observable<User[]>{
-    return this.http.delete<User[]>('http://localhost:3000/user/:id');
+  getUserById(id : ObjectId): Observable<User | null> {
+    // editUser/632c147d72828689cbfa1ef7 on backend should bring an User object or null (if not found)
+    const url = `${this.userUrl}/${id}`;
+    return this.http
+    .get<User>(url);
   }
 
+  addUser(user : User): Observable<User>{
+    return this.http.post<User>(this.userUrl, user, this.httpOptions);
+  }
+
+  updateUser(user : User): Observable<User> {
+    const url = this.userUrl+'/'+user._id;
+    console.log(url);
+    return this.http.put<User>(url, user, this.httpOptions);
+    
+  }
+
+  deleteUser(id:ObjectId) {
+    const url = this.userUrl+'/'+id;
+    return this.http.delete(url);
+  }
 
 
   getInventoryLocation():Observable<InventoryLocation[]>{
-    return this.http.get<InventoryLocation[]>('http://localhost:3000/location');
+    return this.http.get<InventoryLocation[]>(this.locationUrl);
   }
+
+  getLocationById(id : ObjectId): InventoryLocation {
+    this.getInventoryLocation().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      this.locationData = result;
+    });
+    return this.locationData.filter((x) => x._id == id)[0];
+  }
+
+  addLocation(location : InventoryLocation): Observable<InventoryLocation>{
+    return this.http.post<InventoryLocation>(this.locationUrl, location, this.httpOptions);
+  }
+
+  updateLocation(id: ObjectId) {
+    const url = this.locationUrl+'/'+id;
+    return this.http.put(url, this.httpOptions);
+  }
+
+  deleteLocation(id:ObjectId) {
+    const url = this.locationUrl+'/'+id;
+    return this.http.delete(url);
+  }
+
   /*
   getItemById(id:ObjectId):InventoryItem{
     this.getDataFromBackend().subscribe(result => {
@@ -112,6 +158,6 @@ export class ConnectionService {
     // });
 
     // NewInventoryItem.save();
-  
+
 
 }
