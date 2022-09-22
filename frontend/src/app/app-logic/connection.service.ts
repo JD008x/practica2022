@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InventoryItem } from '../../../../backend/src/models/inventoryItem.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ObjectId } from 'mongoose';
 import { User } from '../../../../backend/src/models/user.model';
 import { InventoryLocation } from '../../../../backend/src/models/inventoryLocation.model';

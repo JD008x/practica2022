@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/app-logic/user.service';
+import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { User } from '../../../../../../../backend/src/models/user.model';
 import { ObjectId } from 'mongoose';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-add-user',
@@ -12,24 +13,19 @@ import { ObjectId } from 'mongoose';
 })
 export class AddUserComponent implements OnInit {
   addUserForm!: FormGroup;
-  user!: User;
+  user: User = new User();
   userId!: ObjectId;
+  userNotFound = false;
   constructor(
     private fb: FormBuilder,
-    private userService: UserService,
+    private userService: ConnectionService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     activatedRoute.params.subscribe((params) => {
-      this.userId = params['_id'] ?? '0';
+      this.userId = params['id'] ?? '0';
     });
-  }
 
-  ngOnInit(): void {
-    this.user =
-      String(this.userId) == '0'
-        ? new User()
-        : this.userService.getUserById(this.userId);
     this.addUserForm = this.fb.group({
       firstName: [this.user.firstName, Validators.required],
       lastName: [this.user.lastName, Validators.required],
@@ -38,21 +34,45 @@ export class AddUserComponent implements OnInit {
     });
   }
 
+  private async getUser(): Promise<User | null> {
+    const user = await firstValueFrom(
+      this.userService.getUserById(this.userId)
+    );
+    return user;
+  }
+
+  ngOnInit(): void {
+    if (String(this.userId) != '0') {
+      this.getUser().then((u) => {
+        if (u) {
+          this.user = u;
+
+          this.addUserForm = this.fb.group({
+            firstName: [this.user.firstName, Validators.required],
+            lastName: [this.user.lastName, Validators.required],
+            phoneNumber: [this.user.phoneNumber, Validators.required],
+            email: [this.user.email, Validators.required],
+          });
+        } else {
+          this.userNotFound = true;
+        }
+      });
+    }
+  }
+
   onSubmit() {
     if (String(this.userId) == '0') {
       this.user = new User(this.addUserForm.value);
-      // this.user._id = new mongoose.Types.ObjectId();
+      this.userService.addUser(this.user).subscribe();
     } else {
       this.user.firstName = this.addUserForm.value.firstName;
       this.user.lastName = this.addUserForm.value.lastName;
       this.user.phoneNumber = this.addUserForm.value.phoneNumber;
       this.user.email = this.addUserForm.value.email;
+      this.userService.updateUser(this.user).subscribe();
     }
-    console.log('user' + this.user);
-    console.log('userdata' + this.userService.userData);
-    this.userService
-      .addUser(this.user)
-      .subscribe((x) => this.userService.userData.push(x));
+    //console.log('user' + this.user);
+    //console.log('userdata' + this.userService.userData);
     this.router.navigate(['/users']);
   }
 

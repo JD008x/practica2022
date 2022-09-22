@@ -1,35 +1,30 @@
-body{
-    background-color: chocolate;
-}
 table{
     width: 100%;
-    background-color: azure;
+    background-color: rgb(228, 228, 234);
 }
 th {
     color:black;
-    border-color: chocolate;
-    
+    border-color: rgb(106, 109, 185);
+
   }
-  
+
   tr {
     color: coral;
-    
+
   }
 button {
-    background-color: white;
+    background-color: rgb(106, 109, 185);
     text-align: center;
     text-decoration: none;
     display: inline-block;
     padding:10px 25px;
-    border-color: chocolate;
+    border-color: rgb(36, 39, 139);
     font-size: 150%;
-    color: chocolate;
-
-
+    color: white;
     display: flex;
     position:absolute; 
-    width: 16.5%;
-    left: 41.75%; 
+    width: 20%;
+    left: 40%; 
     bottom: auto;
 
 }
@@ -37,3 +32,14 @@ button {
 button:hover, button:active{
     background-color: cadetblue;
 }
+
+.but {
+    color:  rgb(106, 109, 185);
+    border: 20%;
+    border-color: rgb(106, 109, 185);
+    background-color: rgb(243, 243, 243);
+}
+a, a:link, a:visited{
+    background-color: rgb(228, 228, 234);
+}
+

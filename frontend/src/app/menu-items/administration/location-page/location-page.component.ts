@@ -6,6 +6,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { InventoryLocation } from '../../../../../../backend/src/models/inventoryLocation.model';
 import { Observable, tap } from 'rxjs';
+import { ObjectId } from 'mongoose';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-page',
@@ -18,7 +20,9 @@ export class LocationPageComponent implements OnInit {
     | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
-  location: any;
+  locations: any;
+  location!: InventoryLocation;
+  locationId!: ObjectId;
 
   locationColumns: string[] = [
     'select',
@@ -53,15 +57,19 @@ export class LocationPageComponent implements OnInit {
   }
 
   masterToggle() {
-    /*this.isAllSelected() ? this.selection.clear() :*/
-    if (this.isAllSelected()) {
-      this.selection.clear();
-    } else {
-      /*var locations= this.inventoryLocation.getInventoryLocation();
-        locations.forEach(function (value) {
-          console.log(value);
-          
-        });*/
-    }
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.locations.data.forEach((row: Element) =>
+          this.selection.select(row)
+        );
+  }
+
+  onDelete(id: ObjectId) {
+    this.locationService.deleteLocation(id).subscribe();
+    this.router.navigate(['/location']);
+  }
+
+  onEdit(id: ObjectId) {
+    this.router.navigate(['editLocation/' + id]);
   }
 }
