@@ -1,1 +1,18 @@
-<p>show-item works!</p>
+<div *ngIf="itemIsFound">
+    <div>
+        <p><b>Id: </b><i>{{item._id}}</i></p>
+        <p><b>Name: </b><i>{{item.name}}</i></p>
+        <p><b>User: </b><i>{{item.user}}</i></p>
+        <p><b>Location: </b><i>{{item.location}}</i></p>
+        <p><b>Inventory number: </b><i>{{item.inventoryNumber}}</i></p>
+        <p><b>Created at: </b><i>{{item.addedDate}}</i></p>
+        <p><b>Modified at: </b><i>{{item.modifiedDate}}</i></p>
+        <p><b>Status: </b><i>{{item.isDeleted}}</i></p>
+        <p>
+            <button mat-raised-button (click)="editItem()">Edit item {{itemId}}</button>
+        </p>
+    </div>
+</div>
+<div *ngIf="!itemIsFound">
+    This item was not found!
+</div>

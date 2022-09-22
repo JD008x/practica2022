@@ -6,11 +6,10 @@ import { User } from '../../../../../../../backend/src/models/user.model';
 import { ObjectId } from 'mongoose';
 import { firstValueFrom } from 'rxjs';
 
-
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
+  styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
   addUserForm!: FormGroup;
@@ -36,30 +35,28 @@ export class AddUserComponent implements OnInit {
   }
 
   private async getUser(): Promise<User | null> {
-    const user = await firstValueFrom(this.userService.getUserById(this.userId));
+    const user = await firstValueFrom(
+      this.userService.getUserById(this.userId)
+    );
     return user;
   }
 
   ngOnInit(): void {
-
     if (String(this.userId) != '0') {
-        this.getUser()
-          .then(
-            (u) => {
-              if (u) {
-                this.user = u;
+      this.getUser().then((u) => {
+        if (u) {
+          this.user = u;
 
-                this.addUserForm = this.fb.group({
-                  firstName: [this.user.firstName, Validators.required],
-                  lastName: [this.user.lastName, Validators.required],
-                  phoneNumber: [this.user.phoneNumber, Validators.required],
-                  email: [this.user.email, Validators.required],
-                });
-              } else {
-                this.userNotFound = true;
-              }
-            }
-          );
+          this.addUserForm = this.fb.group({
+            firstName: [this.user.firstName, Validators.required],
+            lastName: [this.user.lastName, Validators.required],
+            phoneNumber: [this.user.phoneNumber, Validators.required],
+            email: [this.user.email, Validators.required],
+          });
+        } else {
+          this.userNotFound = true;
+        }
+      });
     }
   }
 
@@ -82,5 +79,4 @@ export class AddUserComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) => {
     return this.addUserForm.controls[controlName].hasError(errorName);
   };
-
 }
