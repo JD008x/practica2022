@@ -9,6 +9,7 @@ import { Observable, tap } from 'rxjs';
 import { ObjectId } from 'mongoose';
 import { User } from '../../../../../../backend/src/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ResourceLoader } from '@angular/compiler';
 
 
 @Component({
@@ -50,8 +51,9 @@ export class UsersPageComponent implements OnInit {
       }
 
       this.users= new MatTableDataSource(result);
-      this.users.sort= this.sort;
       this.users.paginator=this.paginator;
+      this.users.sort= this.sort;
+      
      })
   }
 
@@ -75,7 +77,7 @@ export class UsersPageComponent implements OnInit {
 
   onDelete(id:ObjectId) {
     this.userService.deleteUser(id).subscribe();
-    this.router.navigate(['/users']);
+    window.location.reload();
   }
 
   onEdit(id:ObjectId) {

@@ -66,19 +66,16 @@ export class AddUserComponent implements OnInit {
   onSubmit() {
     if (String(this.userId) == '0') {
       this.user = new User(this.addUserForm.value);
-      this.userService.updateUser(this.userId);
+      this.userService.addUser(this.user).subscribe();
     } else {
       this.user.firstName = this.addUserForm.value.firstName;
       this.user.lastName = this.addUserForm.value.lastName;
       this.user.phoneNumber = this.addUserForm.value.phoneNumber;
       this.user.email = this.addUserForm.value.email;
-
+      this.userService.updateUser(this.user).subscribe();
     }
-    console.log('user' + this.user);
-    console.log('userdata' + this.userService.userData);
-    this.userService
-      .addUser(this.user)
-      .subscribe((x) => this.userService.userData.push(x));
+    //console.log('user' + this.user);
+    //console.log('userdata' + this.userService.userData);
     this.router.navigate(['/users']);
   }
 

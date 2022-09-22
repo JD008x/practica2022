@@ -90,9 +90,11 @@ export class ConnectionService {
     return this.http.post<User>(this.userUrl, user, this.httpOptions);
   }
 
-  updateUser(id: ObjectId) {
-    const url = this.userUrl+'/'+id;
-    return this.http.put(url, this.httpOptions);
+  updateUser(user : User): Observable<User> {
+    const url = this.userUrl+'/'+user._id;
+    console.log(url);
+    return this.http.put<User>(url, user, this.httpOptions);
+    
   }
 
   deleteUser(id:ObjectId) {
