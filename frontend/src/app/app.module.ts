@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatLabel } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [AppComponent, RoutingComponent],

@@ -21,7 +21,6 @@ export class LocationPageComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
   locations: any;
-  location!: InventoryLocation;
   locationId!: ObjectId;
 
   locationColumns: string[] = [
@@ -35,24 +34,27 @@ export class LocationPageComponent implements OnInit {
   ];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private inventoryLocation: ConnectionService) {
-    this.location = inventoryLocation.getInventoryLocationData();
+  constructor(
+    private connectionService: ConnectionService,
+    private router: Router
+  ) {
+    this.locations = connectionService.getInventoryLocationData();
   }
   ngOnInit(): void {
-    this.inventoryLocation
+    this.connectionService
       .getInventoryLocationData()
       .subscribe((result: unknown[] | undefined) => {
         if (!result) {
           return;
         }
-        this.location = new MatTableDataSource(result);
-        this.location.sort = this.sort;
-        this.location.paginator = this.paginator;
+        this.locations = new MatTableDataSource(result);
+        this.locations.sort = this.sort;
+        this.locations.paginator = this.paginator;
       });
   }
   isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
-    const numRows = this.inventoryLocation.getInventoryLocationData.length;
+    const numRows = this.connectionService.getInventoryLocationData.length;
     return numSelected == numRows;
   }
 
@@ -65,7 +67,7 @@ export class LocationPageComponent implements OnInit {
   }
 
   onDelete(id: ObjectId) {
-    this.locationService.deleteLocation(id).subscribe();
+    this.connectionService.deleteLocation(id);
     this.router.navigate(['/location']);
   }
 

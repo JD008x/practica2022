@@ -11,15 +11,15 @@ import { User } from '../../../../../../backend/src/models/user.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResourceLoader } from '@angular/compiler';
 
-
 @Component({
   selector: 'app-users-page',
   templateUrl: './users-page.component.html',
-  styleUrls: ['./users-page.component.css']
+  styleUrls: ['./users-page.component.css'],
 })
 export class UsersPageComponent implements OnInit {
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  @ViewChild(MatPaginator, { static: true }) paginator:
+    | MatPaginator
+    | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
   users: any;
@@ -32,29 +32,28 @@ export class UsersPageComponent implements OnInit {
     'lastname',
     'phoneNumber',
     'email',
-    'actions'
+    'actions',
   ];
   selection = new SelectionModel<Element>(true, []);
 
   constructor(
     private userService: ConnectionService,
     private router: Router,
-    private activatedRoute: ActivatedRoute)
-    {
-    this.users = userService.getUsersFromBackend();
-   }
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.users = userService.getUserData();
+  }
 
   ngOnInit(): void {
-    this.userService.getUsersFromBackend().subscribe(result => {
-      if(!result){
-        return ;
+    this.userService.getUserData().subscribe((result) => {
+      if (!result) {
+        return;
       }
 
-      this.users= new MatTableDataSource(result);
-      this.users.paginator=this.paginator;
-      this.users.sort= this.sort;
-      
-     })
+      this.users = new MatTableDataSource(result);
+      this.users.paginator = this.paginator;
+      this.users.sort = this.sort;
+    });
   }
 
   isAllSelected() {
@@ -64,8 +63,9 @@ export class UsersPageComponent implements OnInit {
   }
 
   masterToggle() {
-    this.isAllSelected() ? this.selection.clear() :
-      this.users.data.forEach((row: Element) => this.selection.select(row));
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.users.data.forEach((row: Element) => this.selection.select(row));
   }
 
   /*
@@ -75,12 +75,12 @@ export class UsersPageComponent implements OnInit {
   });
   }*/
 
-  onDelete(id:ObjectId) {
+  onDelete(id: ObjectId) {
     this.userService.deleteUser(id).subscribe();
     window.location.reload();
   }
 
-  onEdit(id:ObjectId) {
-    this.router.navigate(['editUser/'+id]);
+  onEdit(id: ObjectId) {
+    this.router.navigate(['editUser/' + id]);
   }
 }

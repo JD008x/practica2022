@@ -22,13 +22,13 @@ export class ConnectionService {
   locationUrl = 'http://localhost:3000/location';
   categoryUrl = 'http://localhost:3000/category';
 
-  locationData: Array<Location>;
+  locationData: Array<InventoryLocation>;
   inventoryData: Array<InventoryItem>;
   userData: Array<User>;
   categoryData: Array<Category>;
   constructor(private http: HttpClient) {
     this.inventoryData = new Array<InventoryItem>();
-    this.locationData = new Array<Location>();
+    this.locationData = new Array<InventoryLocation>();
     this.userData = new Array<User>();
     this.categoryData = new Array<Category>();
   }
@@ -36,6 +36,34 @@ export class ConnectionService {
   //LOCATION ACTIONS
   getInventoryLocationData(): Observable<InventoryLocation[]> {
     return this.http.get<InventoryLocation[]>(this.locationUrl);
+  }
+
+  getLocationById(id: ObjectId): InventoryLocation {
+    this.getInventoryLocationData().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      this.locationData = result;
+    });
+    return this.locationData.filter((x) => x._id == id)[0];
+  }
+
+  addLocation(location: InventoryLocation): Observable<InventoryLocation> {
+    return this.http.post<InventoryLocation>(
+      this.locationUrl,
+      location,
+      this.httpOptions
+    );
+  }
+
+  updateLocation(id: ObjectId) {
+    const url = this.locationUrl + '/' + id;
+    return this.http.put(url, this.httpOptions);
+  }
+
+  deleteLocation(id: ObjectId) {
+    const url = this.locationUrl + '/' + id;
+    return this.http.delete(url);
   }
 
   //CATEGORY ACTIONS
@@ -102,26 +130,51 @@ export class ConnectionService {
     return this.http.delete<InventoryItem[]>(this.inventoryUrl);
   }
 
+  updateItem(inventoryItem: InventoryItem): Observable<InventoryItem> {
+    const url = this.inventoryUrl + '/' + inventoryItem._id;
+    console.log(url);
+    return this.http.patch<InventoryItem>(url, inventoryItem, this.httpOptions);
+  }
+
   //USER ACTIONS
   getUserData(): Observable<User[]> {
     return this.http.get<User[]>(this.userUrl);
   }
 
-  getUserById(id: ObjectId): User {
-    this.getUserData().subscribe((result) => {
-      if (!result) {
-        return;
-      }
-      this.userData = result;
-    });
-    return this.userData.filter((x) => x._id == id)[0];
-  }
+  // getUserById(id: ObjectId): User {
+  //   this.getUserData().subscribe((result) => {
+  //     if (!result) {
+  //       return;
+  //     }
+  //     this.userData = result;
+  //   });
+  //   return this.userData.filter((x) => x._id == id)[0];
+  // }
 
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.userUrl, user, this.httpOptions);
   }
 
-  deleteUsers(id: ObjectId): Observable<User[]> {
-    return this.http.delete<User[]>(this.userIdUrl);
+  updateUser(user: User): Observable<User> {
+    const url = this.userUrl + '/' + user._id;
+    console.log(url);
+    return this.http.put<User>(url, user, this.httpOptions);
+  }
+
+  deleteUser(id: ObjectId) {
+    const url = this.userUrl + '/' + id;
+    return this.http.delete(url);
+  }
+
+  getUsersFromBackend(): Observable<User[]> {
+    return this.http
+      .get<User[]>(this.userUrl)
+      .pipe(tap((result: User[]) => (this.userData = result)));
+  }
+
+  getUserById(id: ObjectId): Observable<User | null> {
+    // editUser/632c147d72828689cbfa1ef7 on backend should bring an User object or null (if not found)
+    const url = `${this.userUrl}/${id}`;
+    return this.http.get<User>(url);
   }
 }

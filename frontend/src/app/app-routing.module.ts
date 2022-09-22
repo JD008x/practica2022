@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'users', component: UsersPageComponent },
   { path: 'addUser', component: AddUserComponent },
-  { path: 'editUser', component: ShowUserComponent },
+  // { path: 'editUser', component: ShowUserComponent },
   { path: 'location', component: LocationPageComponent },
   { path: 'category', component: CategoryPageComponent },
   { path: 'addCategory', component: AddCategoryComponent },
@@ -47,7 +47,8 @@ export const RoutingComponent = [
   UsersPageComponent,
   LocationPageComponent,
   AddUserComponent,
-  ShowUserComponent,
+  // ShowUserComponent,
   CategoryPageComponent,
   AddCategoryComponent,
+  AddLocationComponent,
 ];
