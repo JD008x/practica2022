@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { User } from '../../../../../../../backend/src/models/user.model';
 import { ObjectId } from 'mongoose';
-import { ObjectUnsubscribedError } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -14,8 +14,9 @@ import { ObjectUnsubscribedError } from 'rxjs';
 })
 export class AddUserComponent implements OnInit {
   addUserForm!: FormGroup;
-  user!: User;
+  user: User = new User();
   userId!: ObjectId;
+  userNotFound = false;
   constructor(
     private fb: FormBuilder,
     private userService: ConnectionService,
@@ -23,22 +24,43 @@ export class AddUserComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     activatedRoute.params.subscribe((params) => {
-      this.userId = params['_id'] ?? '0';
+      this.userId = params['id'] ?? '0';
+    });
+
+    this.addUserForm = this.fb.group({
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      phoneNumber: [this.user.phoneNumber, Validators.required],
+      email: [this.user.email, Validators.required],
     });
   }
 
+  private async getUser(): Promise<User | null> {
+    const user = await firstValueFrom(this.userService.getUserById(this.userId));
+    return user;
+  }
+
   ngOnInit(): void {
-    this.user =
-      String(this.userId) == '0'
-        ? new User()
-        : this.userService.getUserById(this.userId);
-    this.addUserForm = this.fb.group({
-      firstName: [this.user.firstName, Validators.required],
-      lastName: [this.user.lastName, Validators.required],    
-      phoneNumber: [this.user.phoneNumber, Validators.required],  
-      email: [this.user.email, Validators.required],
-      
-    });
+
+    if (String(this.userId) != '0') {
+        this.getUser()
+          .then(
+            (u) => {
+              if (u) {
+                this.user = u;
+
+                this.addUserForm = this.fb.group({
+                  firstName: [this.user.firstName, Validators.required],
+                  lastName: [this.user.lastName, Validators.required],
+                  phoneNumber: [this.user.phoneNumber, Validators.required],
+                  email: [this.user.email, Validators.required],
+                });
+              } else {
+                this.userNotFound = true;
+              }
+            }
+          );
+    }
   }
 
   onSubmit() {
@@ -50,7 +72,7 @@ export class AddUserComponent implements OnInit {
       this.user.lastName = this.addUserForm.value.lastName;
       this.user.phoneNumber = this.addUserForm.value.phoneNumber;
       this.user.email = this.addUserForm.value.email;
-      
+
     }
     console.log('user' + this.user);
     console.log('userdata' + this.userService.userData);

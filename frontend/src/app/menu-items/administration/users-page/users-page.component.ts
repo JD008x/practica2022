@@ -23,7 +23,6 @@ export class UsersPageComponent implements OnInit {
 
   users: any;
   user!: User;
-  userId!: ObjectId;
 
   userColumns: string[] = [
     'select',
@@ -39,12 +38,9 @@ export class UsersPageComponent implements OnInit {
   constructor(
     private userService: ConnectionService,
     private router: Router,
-    private activatedRoute: ActivatedRoute) 
+    private activatedRoute: ActivatedRoute)
     {
     this.users = userService.getUsersFromBackend();
-    activatedRoute.params.subscribe((params) => {
-      this.userId = params['_id'] ?? '0';
-    });
    }
 
   ngOnInit(): void {

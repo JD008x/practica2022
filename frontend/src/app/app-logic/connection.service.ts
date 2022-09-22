@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InventoryItem } from '../../../../backend/src/models/inventoryItem.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ObjectId } from 'mongoose';
 import { InventoryItemDB } from '../../../../backend/src/schemas/inventoryItem.schema';
 import {postInventory} from '../../../../backend/src/services/inventoryItem.service'
@@ -32,7 +32,7 @@ export class ConnectionService {
     this.userData = new Array<User>();
     this.locationData = new Array<InventoryLocation>();
   }
- 
+
   getDataFromBackend(): Observable<InventoryItem[]>{
     return this.http.get<InventoryItem[]>(this.inventoryUrl);
   }
@@ -69,22 +69,23 @@ export class ConnectionService {
       this.httpOptions
     );
   }
-  
+
 
   getUsersFromBackend(): Observable<User[]>{
-    return this.http.get<User[]>(this.userUrl);
+    return this.http
+    .get<User[]>(this.userUrl)
+    .pipe(
+      tap((result: User[]) => this.userData = result)
+    );
   }
 
-  getUserById(id : ObjectId): User {
-    this.getUsersFromBackend().subscribe((result) => {
-      if (!result) {
-        return;
-      }
-      this.userData = result;
-    });
-    return this.userData.filter((x) => x._id == id)[0];
+  getUserById(id : ObjectId): Observable<User | null> {
+    // editUser/632c147d72828689cbfa1ef7 on backend should bring an User object or null (if not found)
+    const url = `${this.userUrl}/${id}`;
+    return this.http
+    .get<User>(url);
   }
-  
+
   addUser(user : User): Observable<User>{
     return this.http.post<User>(this.userUrl, user, this.httpOptions);
   }
@@ -113,7 +114,7 @@ export class ConnectionService {
     });
     return this.locationData.filter((x) => x._id == id)[0];
   }
-  
+
   addLocation(location : InventoryLocation): Observable<InventoryLocation>{
     return this.http.post<InventoryLocation>(this.locationUrl, location, this.httpOptions);
   }
@@ -155,6 +156,6 @@ export class ConnectionService {
     // });
 
     // NewInventoryItem.save();
-  
+
 
 }
