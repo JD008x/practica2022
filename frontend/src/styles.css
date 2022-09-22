@@ -5,10 +5,13 @@
 body { margin: 0; font-family: Verdana, Geneva, Tahoma, sans-serif; }
 
 a:link, a:visited {
-
+   
     text-align: center;
     text-decoration: none;
     display: inline-block;
     padding:10px 25px;
 }
 
+/* a:hover, a:active{
+    background-color:rgb(85, 88, 172);
+}  */
