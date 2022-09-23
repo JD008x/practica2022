@@ -1,10 +1,5 @@
- html, body{
-    height: 100%;
-    
-}
-
 a {  
-    font-family: "Montserrat",sans-serif;
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
     font-weight: 500;
     font-size: 16px;
     color:white;
@@ -42,9 +37,15 @@ a:link, a:visited {
     display: inline-block;
     padding:10px 25px;
     font-weight: 100;
+    /* font-size: 25px; */
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 a:hover, a:active{
     background-color:rgb(85, 88, 172);
+        
 }
+
+a {
+    transition: all 0.3s ease 0s;
+} 
