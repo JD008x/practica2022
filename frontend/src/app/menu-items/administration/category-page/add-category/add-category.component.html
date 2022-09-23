@@ -4,7 +4,7 @@
 
 <div class="row">
   <div class="column">
-    <p *ngIf="categoryNotFound">The user was not found!</p>
+    <p *ngIf="categoryNotFound">The category was not found!</p>
     <form *ngIf="!categoryNotFound" [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field appearance="outline">

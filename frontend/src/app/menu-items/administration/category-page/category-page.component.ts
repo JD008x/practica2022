@@ -20,7 +20,7 @@ export class CategoryPageComponent implements OnInit {
     | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
-  categorys: any;
+  categories: any;
   category!: Category;
 
   categoryColumns: 
@@ -44,21 +44,21 @@ export class CategoryPageComponent implements OnInit {
       if (!result) {
         return;
       }
-      this.categorys = new MatTableDataSource(result);
-      this.categorys.sort = this.sort;
-      this.categorys.paginator = this.paginator;
+      this.categories = new MatTableDataSource(result);
+      this.categories.sort = this.sort;
+      this.categories.paginator = this.paginator;
     });
   }
   isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
-    const numRows = this.categorys.data.length;
+    const numRows = this.categories.data.length;
     return numSelected == numRows;
   }
 
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.categorys.data.forEach((row: Element) => this.selection.select(row));
+      : this.categories.data.forEach((row: Element) => this.selection.select(row));
   }
 
   onDelete(id: ObjectId) {

@@ -2,16 +2,23 @@
 
 /* @import url('https://fonts.googleapis.com/css2?family=Montserrat:500'); */
 /* html, body { height: 100%; } */
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html{
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    color:rgb(61, 64, 148);
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;    
+      margin: 0px;
+    
+     }
 
 a:link, a:visited {
-    background-color: chocolate;
+   
     text-align: center;
     text-decoration: none;
     display: inline-block;
     padding:10px 25px;
 }
 
-a:hover, a:active{
-    background-color: cadetblue;
-} 
