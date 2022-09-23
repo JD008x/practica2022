@@ -42,7 +42,7 @@ inventoryCategoryRouter.get("/", async (_req: Request, res: Response, next: Next
   }
 });
 //update inventory item
-inventoryCategoryRouter.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
+inventoryCategoryRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
     inventoryCategory: body;
     if(body.name || body.parentCategory)

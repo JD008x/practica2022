@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { InventoryLocation } from '../../../../../../../backend/src/models/inventoryLocation.model';
 import { ObjectId } from 'mongoose';
-import { ObjectUnsubscribedError } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-add-location',
@@ -13,8 +13,10 @@ import { ObjectUnsubscribedError } from 'rxjs';
 })
 export class AddLocationComponent implements OnInit {
   addLocationForm!: FormGroup;
-  location!: InventoryLocation;
+  location: InventoryLocation = new InventoryLocation();
   locationId!: ObjectId;
+  locationNotFound = false;
+
   constructor(
     private fb: FormBuilder,
     private locationService: ConnectionService,
@@ -22,40 +24,54 @@ export class AddLocationComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     activatedRoute.params.subscribe((params) => {
-      this.locationId = params['_id'] ?? '0';
+      this.locationId = params['id'] ?? '0';
+    });
+
+    this.addLocationForm = this.fb.group({
+      locationName: [this.location.locationName, Validators.required],
+        address: [this.location.address, Validators.required],    
+        managerName: [this.location.managerName, Validators.required],  
+        phoneNumber: [this.location.phoneNumber, Validators.required],
     });
   }
 
+  private async getLocation(): Promise<InventoryLocation | null> {
+    const location = await firstValueFrom(
+      this.locationService.getLocationById(this.locationId)
+    );
+    return location;
+    }
+
   ngOnInit(): void {
-    this.location =
-      String(this.locationId) == '0'
-        ? new InventoryLocation()
-        : this.locationService.getLocationById(this.locationId);
-    this.addLocationForm = this.fb.group({
-      locationName: [this.location.locationName, Validators.required],
-      address: [this.location.address, Validators.required],    
-      managerName: [this.location.managerName, Validators.required],  
-      phoneNumber: [this.location.phoneNumber, Validators.required],
-      
-    });
+    if (String(this.locationId) != '0') {
+      this.getLocation().then((l) => {
+        if (l) {
+          this.location = l;
+
+          this.addLocationForm = this.fb.group({
+            locationName: [this.location.locationName, Validators.required],
+            address: [this.location.address, Validators.required],    
+            managerName: [this.location.managerName, Validators.required],  
+            phoneNumber: [this.location.phoneNumber, Validators.required],
+          });
+        } else {
+          this.locationNotFound = true;
+        }
+      });
+    }
   }
 
   onSubmit() {
     if (String(this.locationId) == '0') {
       this.location = new InventoryLocation(this.addLocationForm.value);
-      //this.locationService.updateLocation(this.locationId);
+      this.locationService.addLocation(this.location).subscribe();
     } else {
       this.location.locationName = this.addLocationForm.value.locationName;
       this.location.address = this.addLocationForm.value.address;
       this.location.managerName = this.addLocationForm.value.managerName;
       this.location.phoneNumber = this.addLocationForm.value.phoneNumber;
-      
+      this.locationService.updateLocation(this.location).subscribe();
     }
-    console.log('location' + this.location);
-    console.log('locationdata' + this.locationService.locationData);
-    this.locationService
-      .addLocation(this.location)
-      .subscribe((x) => this.locationService.locationData.push(x));
     this.router.navigate(['/location']);
   }
 

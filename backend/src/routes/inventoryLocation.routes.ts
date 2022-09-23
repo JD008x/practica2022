@@ -39,7 +39,7 @@ inventoryLocationRouter.get("/:id", async (req: Request, res: Response, next: Ne
     }
   });
 //update
-inventoryLocationRouter.patch("/:id", async (req: Request, res: Response, next: NextFunction) => {
+inventoryLocationRouter.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
   const body = req.body;
   location : body;
   if(body.locationName || body.address || body.managerName || body.phoneNumber)
@@ -53,7 +53,7 @@ inventoryLocationRouter.patch("/:id", async (req: Request, res: Response, next: 
               phoneNumber: body.phoneNumber },
         );
       if(findLocation == null)
-          return next("Could not find this location");
+          res.send("Could not find this location!");
       console.log('updated');
       const inventoryLocationById = await InventoryLocationDB.findById(req.params.id);
       res.send(inventoryLocationById);
@@ -61,7 +61,7 @@ inventoryLocationRouter.patch("/:id", async (req: Request, res: Response, next: 
       return next(ex);
     }
   }else{
-    return next('No attributes found!');
+    res.send('No attributes found!');
   }
   });
 //delete 
