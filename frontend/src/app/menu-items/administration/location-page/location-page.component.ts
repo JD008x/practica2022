@@ -67,8 +67,8 @@ export class LocationPageComponent implements OnInit {
   }
 
   onDelete(id: ObjectId) {
-    this.connectionService.deleteLocation(id);
-    this.router.navigate(['/location']);
+    this.connectionService.deleteLocation(id).subscribe();
+    window.location.reload();
   }
 
   onEdit(id: ObjectId) {

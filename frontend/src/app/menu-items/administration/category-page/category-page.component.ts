@@ -6,6 +6,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
 import { Category } from '../../../../../../backend/src/models/category.model';
 import { Observable, tap } from 'rxjs';
+import { ObjectId } from 'mongoose';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-page',
@@ -18,45 +20,53 @@ export class CategoryPageComponent implements OnInit {
     | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
-  category: any;
+  categorys: any;
+  category!: Category;
 
-  categoryColumns: string[] = ['select', 'name', 'parentCategory'];
+  categoryColumns: 
+  string[] = [
+    'select', 
+    'name', 
+    'parentCategory',
+    'actions'
+  ];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private connectionService: ConnectionService) {
-    this.connectionService.getCategoryData().subscribe((result) => {
-      if (!result) {
-        return;
-      }
-      this.category = result;
-    });
-  }
+  constructor(
+    private categoryService: ConnectionService,
+    private router: Router
+    ) {
+    this.categoryService.getCategoryData();
+    }
+  
   ngOnInit(): void {
-    this.connectionService.getCategoryData().subscribe((result) => {
+    this.categoryService.getCategoryData().subscribe((result) => {
       if (!result) {
         return;
       }
-      this.category = new MatTableDataSource(result);
-      this.category.sort = this.sort;
-      this.category.paginator = this.paginator;
+      this.categorys = new MatTableDataSource(result);
+      this.categorys.sort = this.sort;
+      this.categorys.paginator = this.paginator;
     });
   }
   isAllSelected(): boolean {
     const numSelected = this.selection.selected.length;
-    const numRows = this.connectionService.getCategoryData.length;
+    const numRows = this.categorys.data.length;
     return numSelected == numRows;
   }
 
   masterToggle() {
-    /*this.isAllSelected() ? this.selection.clear() :*/
-    if (this.isAllSelected()) {
-      this.selection.clear();
-    } else {
-      /*var locations= this.inventoryLocation.getInventoryLocation();
-        locations.forEach(function (value) {
-          console.log(value);
-          
-        });*/
-    }
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.categorys.data.forEach((row: Element) => this.selection.select(row));
+  }
+
+  onDelete(id: ObjectId) {
+    this.categoryService.deleteCategory(id).subscribe();
+    window.location.reload();
+  }
+
+  onEdit(id: ObjectId) {
+    this.router.navigate(['editCategory/' + id]);
   }
 }

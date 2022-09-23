@@ -17,9 +17,7 @@ import { ResourceLoader } from '@angular/compiler';
   styleUrls: ['./users-page.component.css'],
 })
 export class UsersPageComponent implements OnInit {
-  @ViewChild(MatPaginator, { static: true }) paginator:
-    | MatPaginator
-    | undefined;
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
   users: any;
@@ -41,11 +39,11 @@ export class UsersPageComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
-    this.users = userService.getUserData();
+    this.users = userService.getUsersFromBackend();
   }
 
   ngOnInit(): void {
-    this.userService.getUserData().subscribe((result) => {
+    this.userService.getUsersFromBackend().subscribe((result) => {
       if (!result) {
         return;
       }
@@ -67,13 +65,6 @@ export class UsersPageComponent implements OnInit {
       ? this.selection.clear()
       : this.users.data.forEach((row: Element) => this.selection.select(row));
   }
-
-  /*
-  delete(event: any) {
-    this.userService.deleteUsers(this.users.value._id).subscribe(data => {
-      alert('Success');
-  });
-  }*/
 
   onDelete(id: ObjectId) {
     this.userService.deleteUser(id).subscribe();
