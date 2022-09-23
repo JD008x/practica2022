@@ -109,7 +109,7 @@
   </div>
   <div class="column">
     <div *ngIf="itemId" class="centered">
-      <qrcode [qrdata]="itemId.toString()"></qrcode>
+      <qr-code [value]="itemId.toString()" [size]="300"></qr-code>
     </div>
   </div>
 </div>

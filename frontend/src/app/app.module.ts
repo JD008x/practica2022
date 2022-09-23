@@ -12,21 +12,20 @@ import { UsersPageComponent } from './menu-items/administration/users-page/users
 import { LocationPageComponent } from './menu-items/administration/location-page/location-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { ShowItemComponent } from './show-item/show-item.component'
-import {QRCodeModule} from 'angularx-qrcode'
-import {ZXingScannerModule} from '@zxing/ngx-scanner'
+import { ShowItemComponent } from './show-item/show-item.component';
+import { QRCodeModule } from 'angular2-qrcode';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MatTableModule } from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
-import {MatSortModule} from '@angular/material/sort';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { AddUserComponent } from './menu-items/administration/users-page/add-user/add-user.component';
 import { ShowUserComponent } from './menu-items/administration/users-page/show-user/show-user.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms'
-import {MatInputModule } from '@angular/material/input'
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import {MatInputModule } from '@angular/material/input'
     LocationPageComponent,
     AddUserComponent,
     ShowUserComponent,
-    
   ],
   imports: [
     BrowserModule,
@@ -59,9 +57,9 @@ import {MatInputModule } from '@angular/material/input'
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
