@@ -4,17 +4,11 @@ import { InventoryItemDB } from "../schemas/inventoryItem.schema";
 export async function postInventory(
   inventoryItem: InventoryItem
 ): Promise<Error | InventoryItem> {
-  if (!inventoryItem || !inventoryItem.user || !inventoryItem.inventoryNumber) {
+  if (!inventoryItem || !inventoryItem.inventoryNumber) {
     return Error("The parameters given are not valid!");
   }
 
   try {
-    const exists = await InventoryItemDB.findOne({ user: inventoryItem.user });
-    if (exists) {
-      return Error(
-        "The item added to the database already exists based on the User!"
-      );
-    }
     const inventoryNumberExists = await InventoryItemDB.findOne({
       inventoryNumber: inventoryItem.inventoryNumber,
     });

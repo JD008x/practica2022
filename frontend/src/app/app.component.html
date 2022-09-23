@@ -16,17 +16,18 @@
             </button>
 
             <button mat-button [matMenuTriggerFor]="menu">
-                <a  routerLink="router.url">ADMINISTRATION</a>
+                <a>ADMINISTRATION</a>
                 <mat-icon style="color: white;">arrow_forward_ios</mat-icon>
             </button>
-            <mat-menu 
-            #menu="matMenu" 
+            <mat-menu
+            #menu="matMenu"
             xPosition="before"
             yPosition="below">
                 <button mat-menu-item routerLink="/users"><mat-icon>person</mat-icon>Users</button>
                 <button mat-menu-item routerLink="/location"><mat-icon>map</mat-icon>Location</button>
+                <button mat-menu-item routerLink="/category"><mat-icon>category</mat-icon>Category</button>
             </mat-menu>
-            
+
             <button mat-button>
                 <a routerLink="/contact">CONTACT</a>
             </button>

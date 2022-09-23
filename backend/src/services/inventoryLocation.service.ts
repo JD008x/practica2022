@@ -8,7 +8,7 @@ export async function postLocation(
         return Error("The parameters given are not valid!");
     }
     try {
-        const exists = await InventoryLocationDB.findOne({ user: inventoryLocation.locationName });
+        const exists = await InventoryLocationDB.findOne({ locationName: inventoryLocation.locationName });
         if (exists) {
           return Error("The item added to the database already exists!");
         }

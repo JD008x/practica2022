@@ -4,20 +4,24 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ConnectionService } from 'src/app/app-logic/connection.service';
-import { InventoryLocation} from '../../../../../../backend/src/models/inventoryLocation.model';
+import { InventoryLocation } from '../../../../../../backend/src/models/inventoryLocation.model';
 import { Observable, tap } from 'rxjs';
+import { ObjectId } from 'mongoose';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-page',
   templateUrl: './location-page.component.html',
-  styleUrls: ['./location-page.component.css']
+  styleUrls: ['./location-page.component.css'],
 })
 export class LocationPageComponent implements OnInit {
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator | undefined;
+  @ViewChild(MatPaginator, { static: true }) paginator:
+    | MatPaginator
+    | undefined;
   @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
 
-  location: any;
+  locations: any;
+  locationId!: ObjectId;
 
   locationColumns: string[] = [
     'select',
@@ -26,45 +30,48 @@ export class LocationPageComponent implements OnInit {
     'address',
     'managerName',
     'phoneNumber',
-    'actions'
+    'actions',
   ];
   selection = new SelectionModel<Element>(true, []);
 
-  constructor(private inventoryLocation : ConnectionService) {
-    this.location=inventoryLocation.getInventoryLocation();
-   }
+  constructor(
+    private connectionService: ConnectionService,
+    private router: Router
+  ) {
+    this.locations = connectionService.getInventoryLocationData();
+  }
   ngOnInit(): void {
-    this.inventoryLocation.getInventoryLocation().subscribe((result: unknown[] | undefined)=> {
+    this.connectionService
+      .getInventoryLocationData()
+      .subscribe((result: unknown[] | undefined) => {
+        if (!result) {
+          return;
+        }
+        this.locations = new MatTableDataSource(result);
+        this.locations.sort = this.sort;
+        this.locations.paginator = this.paginator;
+      });
+  }
+  isAllSelected(): boolean {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.connectionService.getInventoryLocationData.length;
+    return numSelected == numRows;
+  }
 
-      if(!result){
-        return ;
-      }
-      this.location= new MatTableDataSource(result);
-      this.location.sort= this.sort;
-      this.location.paginator=this.paginator;
-     })
-    }
-    isAllSelected(): boolean{
-      const numSelected=this.selection.selected.length;
-      const numRows=this.inventoryLocation.getInventoryLocation.length;
-      return numSelected ==numRows;
-    }
+  masterToggle() {
+    this.isAllSelected()
+      ? this.selection.clear()
+      : this.locations.data.forEach((row: Element) =>
+          this.selection.select(row)
+        );
+  }
 
-    masterToggle(){
-      /*this.isAllSelected() ? this.selection.clear() :*/
-      if(this.isAllSelected()) 
-      {this.selection.clear() } 
-      else {
-        /*var locations= this.inventoryLocation.getInventoryLocation();
-        locations.forEach(function (value) {
-          console.log(value);
-          
-        });*/
+  onDelete(id: ObjectId) {
+    this.connectionService.deleteLocation(id);
+    this.router.navigate(['/location']);
+  }
 
-
-      }
-    };
-
-
-    }
-  
+  onEdit(id: ObjectId) {
+    this.router.navigate(['editLocation/' + id]);
+  }
+}

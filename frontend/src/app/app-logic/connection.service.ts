@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { InventoryItem } from '../../../../backend/src/models/inventoryItem.model';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { ObjectId } from 'mongoose';
-import { InventoryItemDB } from '../../../../backend/src/schemas/inventoryItem.schema';
-import {postInventory} from '../../../../backend/src/services/inventoryItem.service'
 import { User } from '../../../../backend/src/models/user.model';
 import { InventoryLocation } from '../../../../backend/src/models/inventoryLocation.model';
-
-
+import { Category } from '../../../../backend/src/models/category.model';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConnectionService {
   httpOptions = {
@@ -21,32 +18,88 @@ export class ConnectionService {
   };
   inventoryUrl = 'http://localhost:3000/inventory';
   userUrl = 'http://localhost:3000/user';
+  userIdUrl = 'http://localhost:3000/user/:id';
+  locationUrl = 'http://localhost:3000/location';
+  categoryUrl = 'http://localhost:3000/category';
 
+  locationData: Array<InventoryLocation>;
   inventoryData: Array<InventoryItem>;
+  userData: Array<User>;
+  categoryData: Array<Category>;
   constructor(private http: HttpClient) {
     this.inventoryData = new Array<InventoryItem>();
+    this.locationData = new Array<InventoryLocation>();
+    this.userData = new Array<User>();
+    this.categoryData = new Array<Category>();
   }
 
-  getDataFromBackend(): Observable<InventoryItem[]>{
-    return this.http.get<InventoryItem[]>(this.inventoryUrl);
+  //LOCATION ACTIONS
+  getInventoryLocationData(): Observable<InventoryLocation[]> {
+    return this.http.get<InventoryLocation[]>(this.locationUrl);
   }
 
-  getUsersFromBackend(): Observable<User[]>{
-    return this.http.get<User[]>(this.userUrl);
-  }
-
-  getItemById(id: ObjectId): InventoryItem {
-    this.getDataFromBackend().subscribe((result) => {
+  getLocationById(id: ObjectId): InventoryLocation {
+    this.getInventoryLocationData().subscribe((result) => {
       if (!result) {
         return;
       }
-      this.inventoryData = result;
+      this.locationData = result;
     });
-    return this.inventoryData.filter((x) => x._id == id)[0];
+    return this.locationData.filter((x) => x._id == id)[0];
+  }
+
+  addLocation(location: InventoryLocation): Observable<InventoryLocation> {
+    return this.http.post<InventoryLocation>(
+      this.locationUrl,
+      location,
+      this.httpOptions
+    );
+  }
+
+  updateLocation(id: ObjectId) {
+    const url = this.locationUrl + '/' + id;
+    return this.http.put(url, this.httpOptions);
+  }
+
+  deleteLocation(id: ObjectId) {
+    const url = this.locationUrl + '/' + id;
+    return this.http.delete(url);
+  }
+
+  //CATEGORY ACTIONS
+  getCategoryData(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.categoryUrl);
+  }
+
+  getCategoryById(id: ObjectId): Category {
+    this.getCategoryData().subscribe((result) => {
+      if (!result) {
+        return;
+      }
+      this.categoryData = result;
+    });
+    return this.categoryData.filter((x) => x._id == id)[0];
+  }
+
+  addCategory(category: Category): Observable<Category> {
+    return this.http.post<Category>(
+      this.categoryUrl,
+      category,
+      this.httpOptions
+    );
+  }
+
+  deleteCategory(id: ObjectId): Observable<Category[]> {
+    return this.http.delete<Category[]>(this.categoryUrl);
+  }
+
+  //INVENTORY ACTIONS
+  getInventoryData(): Observable<InventoryItem[]> {
+    return this.http.get<InventoryItem[]>(this.inventoryUrl);
   }
 
   verifyExistance(inventoryNumber: number): boolean {
-    this.getDataFromBackend().subscribe((result) => {
+    this.getInventoryData().subscribe((result) => {
       if (!result) {
         return;
       }
@@ -67,51 +120,61 @@ export class ConnectionService {
       this.httpOptions
     );
   }
-  
-/*
-  getUserById(id : ObjectId): Observable<User[]>{
-    return this.http.get<User[]>('http://localhost:3000/user/:id');
+
+  getItemById(id: ObjectId): Observable<InventoryItem> {
+    console.log(this.http.get<InventoryItem>(this.inventoryUrl + id));
+    return this.http.get<InventoryItem>(this.inventoryUrl + '/' + id);
   }
 
-  postUser(user : User): Observable<User[]>{
-    return this.http.post<User[]>('http://localhost:3000/user', user);
-  }*/
-  deleteUsers(id : ObjectId): Observable<User[]>{
-    return this.http.delete<User[]>('http://localhost:3000/user/:id');
+  deleteInventoryItem(id: ObjectId): Observable<InventoryItem[]> {
+    return this.http.delete<InventoryItem[]>(this.inventoryUrl);
   }
 
-
-
-  getInventoryLocation():Observable<InventoryLocation[]>{
-    return this.http.get<InventoryLocation[]>('http://localhost:3000/location');
+  updateItem(inventoryItem: InventoryItem): Observable<InventoryItem> {
+    const url = this.inventoryUrl + '/' + inventoryItem._id;
+    console.log(url);
+    return this.http.patch<InventoryItem>(url, inventoryItem, this.httpOptions);
   }
-  /*
-  getItemById(id:ObjectId):InventoryItem{
-    this.getDataFromBackend().subscribe(result => {
-      if(!result){
-        return ;
-      }
-      this.inventoryData = result;
-     })
-    return this.inventoryData.filter((x) => x._id == id)[0];
 
-  }*/
+  //USER ACTIONS
+  getUserData(): Observable<User[]> {
+    return this.http.get<User[]>(this.userUrl);
+  }
 
- // addItem(item:InventoryItem){
- //   console.log(item);
-    // console.log(InventoryItemDB.db.name);
-    // const NewInventoryItem = new InventoryItemDB({
-    //   user : item.user,
-    //   name: item.name ,
-    //   category: item.category ,
-    //   inventoryNumber : item.inventoryNumber,
-    //   addedDate: item.addedDate,
-    //   modifiedDate: item.modifiedDate ,
-    //   location: item.location,
-    //   isDeleted: item.isDeleted
-    // });
+  // getUserById(id: ObjectId): User {
+  //   this.getUserData().subscribe((result) => {
+  //     if (!result) {
+  //       return;
+  //     }
+  //     this.userData = result;
+  //   });
+  //   return this.userData.filter((x) => x._id == id)[0];
+  // }
 
-    // NewInventoryItem.save();
-  
+  addUser(user: User): Observable<User> {
+    return this.http.post<User>(this.userUrl, user, this.httpOptions);
+  }
 
+  updateUser(user: User): Observable<User> {
+    const url = this.userUrl + '/' + user._id;
+    console.log(url);
+    return this.http.put<User>(url, user, this.httpOptions);
+  }
+
+  deleteUser(id: ObjectId) {
+    const url = this.userUrl + '/' + id;
+    return this.http.delete(url);
+  }
+
+  getUsersFromBackend(): Observable<User[]> {
+    return this.http
+      .get<User[]>(this.userUrl)
+      .pipe(tap((result: User[]) => (this.userData = result)));
+  }
+
+  getUserById(id: ObjectId): Observable<User | null> {
+    // editUser/632c147d72828689cbfa1ef7 on backend should bring an User object or null (if not found)
+    const url = `${this.userUrl}/${id}`;
+    return this.http.get<User>(url);
+  }
 }

@@ -24,6 +24,7 @@
     "@zxing/ngx-scanner": "^3.6.2",
     "angular2-qrcode": "^2.0.3",
     "angularx-qrcode": "^14.0.0",
+    "bson": "^4.7.0",
     "dotenv": "^16.0.2",
     "fs": "^0.0.1-security",
     "os": "^0.1.2",

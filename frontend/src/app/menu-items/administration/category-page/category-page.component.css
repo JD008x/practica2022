@@ -8,7 +8,7 @@ th {
   }
   
 
-.btn {
+button {
     background-color: white;
     text-align: center;
     text-decoration: none;
@@ -17,7 +17,7 @@ th {
     font-size: 150%;
     display: flex;
     position:absolute; 
-    width: 16.5%;
+    width: 10.5%;
     left: 41.75%; 
     bottom: auto;
 }
