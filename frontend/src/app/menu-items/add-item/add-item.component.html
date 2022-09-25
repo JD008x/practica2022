@@ -80,8 +80,20 @@
           >
         </mat-form-field>
       </p>
+      <p *ngIf="!editForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Select if is deleted:</mat-label>
+          <mat-select  [(value)]="item.isDeleted" (selectionChange)="item.isDeleted" formControlName="isDeleted">
+            <mat-option [value]="item.isDeleted">{{item.isDeleted}}</mat-option>
+            <mat-option [value]="!item.isDeleted">{{!item.isDeleted}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('location', 'required')">
+          </mat-error
+          >
+        </mat-form-field>
+      </p>
       <button mat-raised-button type="submit" [disabled]="!addItemForm.valid">
-        Submit
+        SUBMIT
       </button>
     </form>
   </div>

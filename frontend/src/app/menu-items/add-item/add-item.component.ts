@@ -43,6 +43,7 @@ export class AddItemComponent implements OnInit {
       inventoryNumber: [this.item.inventoryNumber, Validators.required],
       addedDate: [new Date(this.item.addedDate).toISOString().split('T')[0],
         Validators.required],
+      isDeleted: [this.item.isDeleted, Validators.required],
     });
 
     this.connectionService.getInventoryLocationData().subscribe((result) => {
@@ -90,6 +91,7 @@ export class AddItemComponent implements OnInit {
             inventoryNumber: [this.item.inventoryNumber, Validators.required],
             addedDate: [new Date(this.item.addedDate).toISOString().split('T')[0],
           Validators.required],
+          isDeleted: [this.item.isDeleted, Validators.required],
           });
         } else {
           this.itemNotFound = true;

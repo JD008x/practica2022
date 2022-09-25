@@ -72,6 +72,6 @@ export class InventoryComponent implements OnInit {
   }
   onDelete(id: ObjectId) {
     this.inventoryList.deleteItem(id).subscribe();
-    window.location.reload();
+    location.reload();
   }
 }
