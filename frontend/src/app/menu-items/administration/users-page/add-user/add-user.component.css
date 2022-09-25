@@ -13,7 +13,7 @@ div{
     grid-template-columns: 140px 200px;
     grid-template-areas: "theText theInput";
     padding-bottom: 20px;
-    /* margin-left: 10px; */
+    margin-left: 10px;
 }
 
 label{

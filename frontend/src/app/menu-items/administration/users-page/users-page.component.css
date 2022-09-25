@@ -44,3 +44,22 @@ a, a:link, a:visited{
     background-color: rgb(228, 228, 234);
 }
 
+.mat-column-firstname{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-lastname{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-phoneNumber{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-email{
+    width: 300px;
+    height:57px
+}

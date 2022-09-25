@@ -1,10 +1,12 @@
 
 table{
     width: 100%;
-    background-color: azure;
+    background-color: rgb(228, 228, 234);
 }
 th {
     color:black;
+    border-color: rgb(106, 109, 185);
+
   }
   
 
@@ -15,7 +17,7 @@ th {
     display: inline-block;
     padding:10px 25px;
     font-size: 150%;
-    display: flex;
+    /* display: flex; */
     position:absolute; 
     width: 16.5%;
     left: 41.75%; 
@@ -25,3 +27,10 @@ th {
 button:hover, button:active{
     background-color: rgb(185, 238, 240);
 }
+
+.mat-column-actions{
+    width: 300px;
+    height:57px
+}
+
+/* .mat-column-actions */

@@ -42,3 +42,28 @@ a, a:link, a:visited{
     background-color: rgb(228, 228, 234);
 }
 
+.mat-column-locationName{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-address{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-managerName{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-phoneNumber{
+    width: 300px;
+    height:57px
+}
+
+/* .mat-column-locationName{
+    width: 209px;
+    height:57px
+} */
+
