@@ -18,7 +18,6 @@ export class ConnectionService {
   };
   inventoryUrl = 'http://localhost:3000/inventory';
   userUrl = 'http://localhost:3000/user';
-  userIdUrl = 'http://localhost:3000/user/:id';
   locationUrl = 'http://localhost:3000/location';
   categoryUrl = 'http://localhost:3000/category';
 
@@ -26,6 +25,7 @@ export class ConnectionService {
   inventoryData: Array<InventoryItem>;
   userData: Array<User>;
   categoryData: Array<Category>;
+
   constructor(private http: HttpClient) {
     this.inventoryData = new Array<InventoryItem>();
     this.locationData = new Array<InventoryLocation>();
@@ -38,14 +38,9 @@ export class ConnectionService {
     return this.http.get<InventoryLocation[]>(this.locationUrl);
   }
 
-  getLocationById(id: ObjectId): InventoryLocation {
-    this.getInventoryLocationData().subscribe((result) => {
-      if (!result) {
-        return;
-      }
-      this.locationData = result;
-    });
-    return this.locationData.filter((x) => x._id == id)[0];
+  getLocationById(id: ObjectId): Observable<InventoryLocation | null> {
+    const url = `${this.locationUrl}/${id}`;
+    return this.http.get<InventoryLocation>(url);
   }
 
   addLocation(location: InventoryLocation): Observable<InventoryLocation> {
@@ -56,9 +51,9 @@ export class ConnectionService {
     );
   }
 
-  updateLocation(id: ObjectId) {
-    const url = this.locationUrl + '/' + id;
-    return this.http.put(url, this.httpOptions);
+  updateLocation(location: InventoryLocation): Observable<InventoryLocation>{
+    const url = this.locationUrl + '/' + location._id;
+    return this.http.put<InventoryLocation>(url, location, this.httpOptions);
   }
 
   deleteLocation(id: ObjectId) {
@@ -71,14 +66,9 @@ export class ConnectionService {
     return this.http.get<Category[]>(this.categoryUrl);
   }
 
-  getCategoryById(id: ObjectId): Category {
-    this.getCategoryData().subscribe((result) => {
-      if (!result) {
-        return;
-      }
-      this.categoryData = result;
-    });
-    return this.categoryData.filter((x) => x._id == id)[0];
+  getCategoryById(id: ObjectId): Observable<Category | null> {
+    const url = `${this.categoryUrl}/${id}`;
+    return this.http.get<Category>(url);
   }
 
   addCategory(category: Category): Observable<Category> {
@@ -89,10 +79,22 @@ export class ConnectionService {
     );
   }
 
-  deleteCategory(id: ObjectId): Observable<Category[]> {
-    return this.http.delete<Category[]>(this.categoryUrl);
+  updateCategory(category: Category): Observable<Category> {
+    const url = this.categoryUrl + '/' + category._id;
+    console.log(url);
+    return this.http.put<Category>(url, category, this.httpOptions);
   }
 
+  deleteCategory(id: ObjectId) {
+    const url = this.categoryUrl + '/' + id;
+    return this.http.delete(url);
+  }
+
+  getCategoriesFromBackend(): Observable<Category[]> {
+    return this.http
+      .get<Category[]>(this.categoryUrl)
+      .pipe(tap((result: Category[]) => (this.categoryData = result)));
+  }
   //INVENTORY ACTIONS
   getInventoryData(): Observable<InventoryItem[]> {
     return this.http.get<InventoryItem[]>(this.inventoryUrl);
@@ -140,16 +142,6 @@ export class ConnectionService {
   getUserData(): Observable<User[]> {
     return this.http.get<User[]>(this.userUrl);
   }
-
-  // getUserById(id: ObjectId): User {
-  //   this.getUserData().subscribe((result) => {
-  //     if (!result) {
-  //       return;
-  //     }
-  //     this.userData = result;
-  //   });
-  //   return this.userData.filter((x) => x._id == id)[0];
-  // }
 
   addUser(user: User): Observable<User> {
     return this.http.post<User>(this.userUrl, user, this.httpOptions);

@@ -2,7 +2,12 @@ h1{
     font-family: 'Calibri', 'Trebuchet MS', sans-serif;
 } 
 
-div{
+
+body {
+    width: 100%;
+    margin: 3% 10%;
+ }
+ div{
     display: grid;
     grid-template-columns: 140px 200px;
     grid-template-areas: "theText theInput";

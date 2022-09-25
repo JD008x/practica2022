@@ -1,4 +1,6 @@
-<h1>User Data</h1>
+
+<body>
+<h1><b>User Data</b></h1>
 
 <div class="row">
   <div class="column">
@@ -62,12 +64,11 @@
       </p>
 
       <button mat-raised-button type="submit" [disabled]="!addUserForm.valid">
-        Submit
+        SUBMIT
       </button>
     </form>
   </div>
 
 </div>
+</body>
 
-<p>Form value: {{ addUserForm.value | json }}</p>
-<p>Form status: {{ addUserForm.status }}</p>

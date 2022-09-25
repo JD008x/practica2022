@@ -1,7 +1,7 @@
 <body>
 
     <div>
-        <table mat-table [dataSource]="category" matSort class="mat-elevation-z8">
+        <table mat-table [dataSource]="categorys" matSort class="mat-elevation-z8">
           
            <!-- Checkbox Column-->
       <ng-container matColumnDef="select">
@@ -42,10 +42,10 @@
           <ng-component matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header><b>ACTIONS</b></th>
             <td mat-cell *matCellDef="let element">
-              <a routerLink="/editCategory/{{ element.id }}">Edit</a>
-              <a> / </a>
-              <a routerLink="/deleteCategory{{ element.id }}">Delete</a>
-            </td>
+              <a class="but" mat-raised-button (click)="onEdit(element._id)">Edit</a>
+          <a> / </a>
+          <a class="but" mat-raised-button (click)="onDelete(element._id)">Delete</a>
+        </td>
           </ng-component>
       
           <tr mat-header-row *matHeaderRowDef="categoryColumns"></tr>

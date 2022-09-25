@@ -25,10 +25,13 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'users', component: UsersPageComponent },
   { path: 'addUser', component: AddUserComponent },
-  // { path: 'editUser', component: ShowUserComponent },
+  { path: 'editUser/:id', component: AddUserComponent },
   { path: 'location', component: LocationPageComponent },
+  { path: 'addLocation', component: AddLocationComponent },
+  { path: 'editLocation/:id', component: AddLocationComponent },
   { path: 'category', component: CategoryPageComponent },
   { path: 'addCategory', component: AddCategoryComponent },
+  { path: 'editCategory/:id', component: AddCategoryComponent },
 ];
 
 @NgModule({
@@ -47,7 +50,6 @@ export const RoutingComponent = [
   UsersPageComponent,
   LocationPageComponent,
   AddUserComponent,
-  // ShowUserComponent,
   CategoryPageComponent,
   AddCategoryComponent,
   AddLocationComponent,
