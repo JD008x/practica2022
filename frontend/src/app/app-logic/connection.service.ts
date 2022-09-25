@@ -123,19 +123,19 @@ export class ConnectionService {
     );
   }
 
-  getItemById(id: ObjectId): Observable<InventoryItem> {
-    console.log(this.http.get<InventoryItem>(this.inventoryUrl + id));
-    return this.http.get<InventoryItem>(this.inventoryUrl + '/' + id);
+  getItemById(id: ObjectId): Observable<InventoryItem | null> {
+    const url = `${this.inventoryUrl}/${id}`;
+    return this.http.get<InventoryItem>(url);
   }
 
-  deleteInventoryItem(id: ObjectId): Observable<InventoryItem[]> {
-    return this.http.delete<InventoryItem[]>(this.inventoryUrl);
+  deleteItem(id: ObjectId) {
+    const url = this.inventoryUrl + '/' + id;
+    return this.http.delete(url);
   }
 
   updateItem(inventoryItem: InventoryItem): Observable<InventoryItem> {
     const url = this.inventoryUrl + '/' + inventoryItem._id;
-    console.log(url);
-    return this.http.patch<InventoryItem>(url, inventoryItem, this.httpOptions);
+    return this.http.put<InventoryItem>(url, inventoryItem, this.httpOptions);
   }
 
   //USER ACTIONS

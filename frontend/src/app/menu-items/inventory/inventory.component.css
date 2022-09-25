@@ -1,27 +1,25 @@
 
 table{
     width: 100%;
-    background-color: azure;
+    background-color: rgb(228, 228, 234);
 }
 th {
     color:black;
+    border-color: rgb(106, 109, 185);
   }
-  
 
-.btn {
-    background-color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    padding:10px 25px;
-    font-size: 150%;
-    display: flex;
-    position:absolute; 
-    width: 16.5%;
-    left: 41.75%; 
-    bottom: auto;
+  tr {
+    color: coral;
+
+  }
+
+.but {
+    color:  rgb(106, 109, 185);
+    border: 20%;
+    border-color: rgb(106, 109, 185);
+    background-color: rgb(243, 243, 243);
+}
+a, a:link, a:visited{
+    background-color: rgb(228, 228, 234);
 }
 
-button:hover, button:active{
-    background-color: rgb(185, 238, 240);
-}

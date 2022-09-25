@@ -20,7 +20,6 @@ const routes: Routes = [
   { path: 'scan', component: ScanComponent },
   { path: 'add-item', component: AddItemComponent },
   { path: 'edit/:id', component: AddItemComponent },
-  { path: 'inventory/edit/:id', component: AddItemComponent },
   { path: 'item/:id', component: ShowItemComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'users', component: UsersPageComponent },

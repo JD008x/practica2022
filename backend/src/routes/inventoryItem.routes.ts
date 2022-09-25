@@ -50,7 +50,7 @@ inventoryItemRouter.get(
   }
 );
 //update inventory item
-inventoryItemRouter.patch(
+inventoryItemRouter.put(
   "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     const body = req.body;
