@@ -1,3 +1,7 @@
+h1{
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+} 
+
 div{
     display: grid;
     grid-template-columns: 140px 200px;

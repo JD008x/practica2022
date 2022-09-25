@@ -5,23 +5,27 @@ table{
 }
 th {
     color:black;
+    border-color: rgb(106, 109, 185);
   }
   
 
-button {
-    background-color: white;
+  button {
+    background-color: rgb(106, 109, 185);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inside;
     padding:10px 25px;
+    border-color: rgb(36, 39, 139);
     font-size: 150%;
-    display: flex;
+    color: white;
     position:absolute; 
-    width: 10.5%;
-    left: 41.75%; 
+    width: 20%;
+    left: 40%; 
     bottom: auto;
+
 }
 
 button:hover, button:active{
-    background-color: rgb(185, 238, 240);
+    background-color: cadetblue;
 }
+

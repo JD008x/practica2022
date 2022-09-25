@@ -16,12 +16,11 @@ button {
     background-color: rgb(106, 109, 185);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inside;
     padding:10px 25px;
     border-color: rgb(36, 39, 139);
     font-size: 150%;
     color: white;
-    display: flex;
     position:absolute; 
     width: 20%;
     left: 40%; 

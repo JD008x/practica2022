@@ -17,18 +17,18 @@ button {
     background-color: rgb(106, 109, 185);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    padding:10px 25px;
+    padding:10px 10px 10px 10px;
     border-color: rgb(36, 39, 139);
     font-size: 150%;
     color: white;
-    display: flex;
+    display: inside;
     position:absolute; 
     width: 16.5%;
     left: 41.75%; 
     bottom: auto;
 
 }
+
 
 button:hover, button:active{
     background-color: cadetblue;
