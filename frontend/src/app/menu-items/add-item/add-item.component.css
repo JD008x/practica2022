@@ -1,36 +1,45 @@
+
+body {
+    width: 100%;
+    margin: 2% 10%;
+ }
+
 h1{
     font-family: 'Calibri', 'Trebuchet MS', sans-serif;
     margin-left: 25px;
     margin-top: 5px;
 }
-/* body {
-    width: 100%;
-    margin: 3% 10%;
- } */
+
  
+
 div{
     display: grid;
     grid-template-columns: 140px 200px;
     grid-template-areas: "theText theInput";
     padding-bottom: 20px;
     margin-left: 10px;
+
 }
 
 label{
     grid-area:theText;
+   
 }
 
 input, textarea{
-    grid-area:theInput
+    grid-area:theInput;
+   
 }
 
 .row{
     display: flex;
+    
 }
 
 .column{
     flex: 50%;
     padding:10px;
+    
 }
 
 .centered{
@@ -39,4 +48,21 @@ input, textarea{
     left: 50%;
     margin-bottom: -128px;
     margin-left: -128px;
+}
+
+.centered{
+    display: inline-block;
+    position: relative;
+    top: 30%;
+    bottom: 30%;
+    left: 70%;
+    margin-bottom: -228px;
+    margin-left: -228px;
+   
+}
+
+.qr {
+    font-size: 20px;
+    padding-bottom: 10px;
+    font-style: oblique;
 }

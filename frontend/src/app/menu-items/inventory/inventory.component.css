@@ -6,9 +6,22 @@ table{
 th {
     color:black;
     border-color: rgb(106, 109, 185);
+  }
+
+  tr {
+    color: coral;
 
   }
-  
+
+.but {
+    color:  rgb(106, 109, 185);
+    border: 20%;
+    border-color: rgb(106, 109, 185);
+    background-color: rgb(243, 243, 243);
+}
+a, a:link, a:visited{
+    background-color: rgb(228, 228, 234);
+}
 
 .btn {
     background-color: white;
@@ -33,4 +46,4 @@ button:hover, button:active{
     height:57px
 }
 
-/* .mat-column-actions */
+

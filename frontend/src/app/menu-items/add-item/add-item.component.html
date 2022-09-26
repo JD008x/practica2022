@@ -1,14 +1,18 @@
-<h1><b>Add Inventory Item</b></h1>
+
+<body>
+
+<h1><b>INVENTORY ITEM DATA</b></h1>
+
 <div class="row">
   <div class="column">
-    <form [formGroup]="addItemForm" *ngIf='addItemForm' (ngSubmit)="onSubmit()">
+    
+    <form  [formGroup]="addItemForm" (ngSubmit)="onSubmit()">
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Item name: </mat-label>
           <input
             matInput
-            matInput
-            placeholder="Item name"
+            placeholder="Name"
             type="text"
             formControlName="name"
           />
@@ -31,11 +35,11 @@
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Select your category</mat-label>
-          <mat-select [(ngModel)]="selectedCategory" (ngModelChange)="changeCategory()" formControlName="category">
+          <mat-select [(value)]="selectedCategory" (selectionChange)="changeCategory()" formControlName="category">
             <mat-option *ngFor="let category of categories" [value]="category.name">{{category.name}}</mat-option>
           </mat-select>
           <mat-error *ngIf="hasError('category', 'required')"
-            >The Category field is required</mat-error
+            >The category field is required</mat-error
           >
         </mat-form-field>
       </p>
@@ -78,14 +82,30 @@
           >
         </mat-form-field>
       </p>
+      <p *ngIf="!editForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Select if is deleted:</mat-label>
+          <mat-select  [(value)]="item.isDeleted" (selectionChange)="item.isDeleted" formControlName="isDeleted">
+            <mat-option [value]="item.isDeleted">{{item.isDeleted}}</mat-option>
+            <mat-option [value]="!item.isDeleted">{{!item.isDeleted}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('location', 'required')">
+          </mat-error
+          >
+        </mat-form-field>
+      </p>
       <button mat-raised-button type="submit" [disabled]="!addItemForm.valid">
-        Submit
+        SUBMIT
       </button>
     </form>
   </div>
-  <div class="column">
-    <div *ngIf="itemId" class="centered">
-      <qr-code [value]="itemId.toString()" [size]="300" ></qr-code>
+
+  <div class="column" *ngIf="!editForm">
+    <div *ngIf="itemId"  class="centered" >
+      <p class = "qr"><b>QR Code for this item inventory:</b></p>
+      <qr-code [value]="itemId.toString()" [size]="250" ></qr-code>
+
     </div>
   </div>
 </div>
+</body>

@@ -13,6 +13,19 @@
   justify-content: left;
   opacity: 0.7;
   position:relative;
+
+}
+
+
+.description{
+  display: block;
+  padding: 5%;
+  height: 50%;
+  width: 50%;
+  position:static;
+}
+
+
 }
 
 
@@ -111,6 +124,16 @@ a:hover, a:active{
   background-color:rgb(85, 88, 172);
 } */
 
+
+
+a:hover, a:active{
+  background-color:rgb(85, 88, 172);
+} */
+
+a { text-decoration: none; }
+
+
+.cards-text {
 
 a { text-decoration: none; }
 
