@@ -67,7 +67,11 @@ export class InventoryComponent implements OnInit {
         );
   }
 
-  onClickEdit(id: ObjectId) {
-    this.router.navigate(['edit/' + String(id)]);
+  onEdit(id: ObjectId) {
+    this.router.navigate(['edit/' + id]);
+  }
+  onDelete(id: ObjectId) {
+    this.inventoryList.deleteItem(id).subscribe();
+    location.reload();
   }
 }

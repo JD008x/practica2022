@@ -18,19 +18,23 @@ div{
 
 label{
     grid-area:theText;
+   
 }
 
 input, textarea{
-    grid-area:theInput
+    grid-area:theInput;
+   
 }
 
 .row{
     display: flex;
+    
 }
 
 .column{
     flex: 50%;
     padding:10px;
+    
 }
 
 .centered{
@@ -39,4 +43,21 @@ input, textarea{
     left: 50%;
     margin-bottom: -128px;
     margin-left: -128px;
+}
+
+.centered{
+    display: inline-block;
+    position: relative;
+    top: 30%;
+    bottom: 30%;
+    left: 70%;
+    margin-bottom: -228px;
+    margin-left: -228px;
+   
+}
+
+.qr {
+    font-size: 20px;
+    padding-bottom: 10px;
+    font-style: oblique;
 }

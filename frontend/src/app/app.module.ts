@@ -4,7 +4,7 @@ import { AppRoutingModule, RoutingComponent } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { ShowItemComponent } from './show-item/show-item.component';
+import { ShowItemComponent } from './show-itsmponent';
 import { QRCodeModule } from 'angular2-qrcode';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MatTableModule } from '@angular/material/table';

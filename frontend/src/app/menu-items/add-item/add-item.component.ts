@@ -7,6 +7,7 @@ import { ObjectId } from 'mongoose';
 import { InventoryLocation } from '../../../../../backend/src/models/inventoryLocation.model';
 import { User } from '../../../../../backend/src/models/user.model';
 import { Category } from '../../../../../backend/src/models/category.model';
+import { firstValueFrom } from 'rxjs';
 @Component({
   selector: 'add-item',
   templateUrl: './add-item.component.html',
@@ -14,7 +15,7 @@ import { Category } from '../../../../../backend/src/models/category.model';
 })
 export class AddItemComponent implements OnInit {
   addItemForm!: FormGroup;
-  item!: InventoryItem;
+  item: InventoryItem = new InventoryItem();
   itemId!: ObjectId;
   locations!: Array<InventoryLocation>;
   users!: Array<User>;
@@ -22,6 +23,8 @@ export class AddItemComponent implements OnInit {
   selectedCategory: string;
   selectedUser: string;
   selectedLocation: string;
+  editForm = false;
+  itemNotFound = false;
   constructor(
     private fb: FormBuilder,
     private connectionService: ConnectionService,
@@ -31,6 +34,18 @@ export class AddItemComponent implements OnInit {
     activatedRoute.params.subscribe((params) => {
       this.itemId = params['id'] ?? '0';
     });
+
+    this.addItemForm = this.fb.group({
+      name: [this.item.name, Validators.required],
+      user: [this.item.user, Validators.required],
+      category: [this.item.category, Validators.required],
+      location: [this.item.location, Validators.required],
+      inventoryNumber: [this.item.inventoryNumber, Validators.required],
+      addedDate: [new Date(this.item.addedDate).toISOString().split('T')[0],
+        Validators.required],
+      isDeleted: [this.item.isDeleted, Validators.required],
+    });
+
     this.connectionService.getInventoryLocationData().subscribe((result) => {
       if (!result) {
         return;
@@ -55,39 +70,35 @@ export class AddItemComponent implements OnInit {
     this.selectedLocation = '';
   }
 
+  private async getItem(): Promise<InventoryItem | null> {
+    const item = await firstValueFrom(
+      this.connectionService.getItemById(this.itemId)
+    );
+    return item;
+  }
+
   ngOnInit(): void {
-    if (String(this.itemId) == '0') {
-      this.item = new InventoryItem();
-      this.addItemForm = this.fb.group({
-        name: [this.item.name, Validators.required],
-        user: [this.item.user, Validators.required],
-        category: [this.item.category, Validators.required],
-        location: [this.item.location, Validators.required],
-        inventoryNumber: [this.item.inventoryNumber, Validators.required],
-        addedDate: [
-          new Date(this.item.addedDate).toISOString().split('T')[0],
-          Validators.required,
-        ],
+    if (String(this.itemId) != '0') {
+      this.getItem().then((i) => {
+        if (i) {
+          this.item = i;
+
+          this.addItemForm = this.fb.group({
+            name: [this.item.name, Validators.required],
+            user: [this.item.user, Validators.required],
+            category: [this.item.category, Validators.required],
+            location: [this.item.location, Validators.required],
+            inventoryNumber: [this.item.inventoryNumber, Validators.required],
+            addedDate: [new Date(this.item.addedDate).toISOString().split('T')[0],
+          Validators.required],
+          isDeleted: [this.item.isDeleted, Validators.required],
+          });
+        } else {
+          this.itemNotFound = true;
+        }
       });
     } else {
-      this.connectionService.getItemById(this.itemId).subscribe((result) => {
-        if (!result) {
-          return;
-        }
-        this.item = result;
-
-        this.addItemForm = this.fb.group({
-          name: [this.item.name, Validators.required],
-          user: [this.item.user, Validators.required],
-          category: [this.item.category, Validators.required],
-          location: [this.item.location, Validators.required],
-          inventoryNumber: [this.item.inventoryNumber, Validators.required],
-          addedDate: [
-            new Date(this.item.addedDate).toISOString().split('T')[0],
-            Validators.required,
-          ],
-        });
-      });
+      this.editForm = true;
     }
   }
 
@@ -96,16 +107,16 @@ export class AddItemComponent implements OnInit {
       this.item = new InventoryItem(this.addItemForm.value);
       this.item.modifiedDate = new Date();
       this.item.isDeleted = false;
-      this.connectionService
-        .addItem(this.item)
-        .subscribe((x) => this.connectionService.inventoryData.push(x));
+      this.connectionService.addItem(this.item).subscribe();
+      
     } else {
+      
       this.item.name = this.addItemForm.value.name;
       this.item.inventoryNumber = this.addItemForm.value.inventoryNumber;
       this.item.addedDate = new Date(this.addItemForm.value.addedDate);
       this.item.modifiedDate = new Date();
       this.item.isDeleted = this.addItemForm.value.isDeleted;
-      this.connectionService.updateItem(this.item);
+      this.connectionService.updateItem(this.item).subscribe();
     }
 
     this.router.navigate(['/inventory']);

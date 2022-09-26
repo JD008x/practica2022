@@ -6,15 +6,15 @@ import { ObjectId } from "mongoose";
 export class InventoryItem {
   // user!:User;
   _id!:ObjectId;
-  user = '';
-  name= '';
-  category= '';
-  inventoryNumber=0;
+  user!:string;
+  name!:string;
+  category!:string;
+  inventoryNumber!:number;
   addedDate= new Date();
   modifiedDate= new Date();
   // location?:InventoryLocation;
-  location='';
-  isDeleted=false;
+  location!:string;
+  isDeleted!:boolean;
 
   public constructor(init?:Partial<InventoryItem>){
     Object.assign(this, init);
