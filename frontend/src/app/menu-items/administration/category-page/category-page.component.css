@@ -17,12 +17,11 @@ button {
     background-color: rgb(106, 109, 185);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inside;
     padding:10px 25px;
     border-color: rgb(36, 39, 139);
     font-size: 150%;
     color: white;
-    display: flex;
     position:absolute; 
     width: 16.5%;
     left: 41.75%; 
@@ -44,3 +43,17 @@ a, a:link, a:visited{
     background-color: rgb(228, 228, 234);
 }
 
+.mat-column-name{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-parentCategory{
+    width: 300px;
+    height:57px
+}
+
+/* .mat-column-actions{
+    width: 300px;
+    height:57px
+} */

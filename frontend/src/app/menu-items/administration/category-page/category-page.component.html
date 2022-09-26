@@ -1,4 +1,4 @@
-<body>
+<!-- <body> -->
 
     <div>
         <table mat-table [dataSource]="categorys" matSort class="mat-elevation-z8">
@@ -6,18 +6,18 @@
            <!-- Checkbox Column-->
       <ng-container matColumnDef="select">
         <th matt-header-cell *matHeaderCellDef>
-            <mat-checkbox 
+            <!-- <mat-checkbox 
                 (change)="$event ? masterToggle() : null"
                 [checked]="selection.hasValue() && isAllSelected()"
                 [indeterminate]="selection.hasValue() && !isAllSelected()"
-            ></mat-checkbox>
+            ></mat-checkbox> -->
         </th>
         <th mat-cell *matCellDef="let row">
-            <mat-checkbox 
+            <!-- <mat-checkbox 
                 (change)="selection.toggle(row)"
                 [checked]="selection.isSelected(row)"
             >
-            </mat-checkbox>
+            </mat-checkbox> -->
         </th>
       </ng-container>
             <!-- ID Columns -->
@@ -62,4 +62,4 @@
         </button>
     
     </div>
-    </body>
+    <!-- </body> -->

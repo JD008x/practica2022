@@ -23,7 +23,7 @@ header {
     transition: all 0.3s ease 0s;
 } 
 
-nav{
+nav{   
     background-color: rgb(106, 109, 185);
 }
 .menu{
@@ -45,6 +45,9 @@ a:hover, a:active{
     background-color:rgb(85, 88, 172);
         
 }
+/* a.mat-button{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+} */
 
 a {
     transition: all 0.3s ease 0s;
