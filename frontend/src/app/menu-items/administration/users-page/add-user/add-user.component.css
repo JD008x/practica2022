@@ -1,3 +1,9 @@
+h1{
+    font-family: 'Calibri', 'Trebuchet MS', sans-serif;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
 body {
     width: 100%;
     margin: 3% 10%;
@@ -7,7 +13,7 @@ div{
     grid-template-columns: 140px 200px;
     grid-template-areas: "theText theInput";
     padding-bottom: 20px;
-    
+    margin-left: 10px;
 }
 
 label{

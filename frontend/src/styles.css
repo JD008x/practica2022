@@ -11,7 +11,7 @@ body {
     width: 100%;
     min-height: 100vh;    
       margin: 0px;
-      overflow-y: hidden;
+      /* overflow-y: hidden; */
      }
 
 a:link, a:visited {
