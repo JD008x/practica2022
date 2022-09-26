@@ -24,7 +24,7 @@ export class InventoryComponent implements OnInit {
     'select',
     'id',
     'name',
-    'description',
+    'category',
     'user',
     'location',
     'inventoryNumber',
