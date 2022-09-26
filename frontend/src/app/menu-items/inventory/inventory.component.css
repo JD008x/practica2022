@@ -23,3 +23,27 @@ a, a:link, a:visited{
     background-color: rgb(228, 228, 234);
 }
 
+.btn {
+    background-color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding:10px 25px;
+    font-size: 150%;
+    /* display: flex; */
+    position:absolute; 
+    width: 16.5%;
+    left: 41.75%; 
+    bottom: auto;
+}
+
+button:hover, button:active{
+    background-color: rgb(185, 238, 240);
+}
+
+.mat-column-actions{
+    width: 300px;
+    height:57px
+}
+
+

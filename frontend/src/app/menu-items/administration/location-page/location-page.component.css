@@ -16,12 +16,11 @@ button {
     background-color: rgb(106, 109, 185);
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    display: inside;
     padding:10px 25px;
     border-color: rgb(36, 39, 139);
     font-size: 150%;
     color: white;
-    display: flex;
     position:absolute; 
     width: 20%;
     left: 40%; 
@@ -42,4 +41,29 @@ button:hover, button:active{
 a, a:link, a:visited{
     background-color: rgb(228, 228, 234);
 }
+
+.mat-column-locationName{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-address{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-managerName{
+    width: 300px;
+    height:57px
+}
+
+.mat-column-phoneNumber{
+    width: 300px;
+    height:57px
+}
+
+/* .mat-column-locationName{
+    width: 209px;
+    height:57px
+} */
 

@@ -17,13 +17,14 @@ header {
 .nav_links {
    display: inline-block;
    padding: 0px 20px;
+   
 }
 
 .nav_links a {
     transition: all 0.3s ease 0s;
 } 
 
-nav{
+nav{   
     background-color: rgb(106, 109, 185);
 }
 .menu{
@@ -46,6 +47,15 @@ a:hover, a:active{
         
 }
 
+
 a {
     transition: all 0.3s ease 0s;
 } 
+
+/* a.mat-button{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+} */
+
+a {
+    transition: all 0.3s ease 0s;
+}

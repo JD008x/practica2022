@@ -1,6 +1,8 @@
+
 <body>
 
 <h1><b>INVENTORY ITEM DATA</b></h1>
+
 <div class="row">
   <div class="column">
     
@@ -97,10 +99,12 @@
       </button>
     </form>
   </div>
+
   <div class="column" *ngIf="!editForm">
     <div *ngIf="itemId"  class="centered" >
       <p class = "qr"><b>QR Code for this item inventory:</b></p>
       <qr-code [value]="itemId.toString()" [size]="250" ></qr-code>
+
     </div>
   </div>
 </div>
